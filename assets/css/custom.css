@@ -1,0 +1,42 @@
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+    font-family: bakh;
+    text-align: right;
+}
+body{
+    font-family: bakh;
+
+}
+.vlt-fullpage-slider .vlt-section__content .container {
+    direction: rtl;
+}
+.vlt-fullpage-slider .vlt-section__content .container .row {
+    text-align: right;
+}
+.vlt-progress-bar__title>span {
+    float: left;
+}
+.swiper-slide-active .vlt-project>* {
+    text-align: right;
+}
+.vlt-swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets {
+    direction: ltr;
+}
+.vlt-slider-controls {
+    direction: ltr;
+}
+.vlt-post--masonry .vlt-read-more-link svg {
+    margin-left:unset;
+    margin-right: 0.625rem;
+    transform: rotate(180deg);
+}
+.vlt-offcanvas-menu__navigation .sf-menu {
+    text-align: right;
+    padding-right: 16px;
+}
+.vlt-offcanvas-menu__footer{
+    text-align: center;
+}
+.vlt-progress-bar__bar span {
+    right: 0;
+    left: unset;
+}
