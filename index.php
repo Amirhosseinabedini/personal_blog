@@ -11,6 +11,8 @@ $db->where('status', 1);
 $education = $db->get('education');
 $db->where('status', 1);
 $Certificates = $db->get('certificates');
+$db->where('status', 1);
+$projects = $db->get('projects');
 ?>
 
 <!DOCTYPE html>
@@ -256,7 +258,10 @@ $Certificates = $db->get('certificates');
                 <div class="vlt-section__vertical-align">
                     <div class="vlt-section__content">
 
-                        <div class="vlt-section__projects-background"><img class="is-active" src="assets/img/project-01.jpg" alt="" loading="lazy"><img src="assets/img/project-02.jpg" alt="" loading="lazy"><img src="assets/img/project-03.jpg" alt="" loading="lazy"></div>
+                        <div class="vlt-section__projects-background">
+                            <img class="is-active" src="assets/img/project-01.jpg" alt="" loading="lazy">
+                            <img src="assets/img/project-02.jpg" alt="" loading="lazy">
+                        </div>
                         <div class="container">
                             <div class="vlt-gap-100"></div>
 
@@ -265,52 +270,44 @@ $Certificates = $db->get('certificates');
                                 <div class="vlt-content-slider " data-navigation-anchor=".vlt-projects-anchor" data-effect="fade" data-gap="" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
                                     <div class="swiper-container">
                                         <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
+                                            <?php
+                                            foreach ($projects as $key => $value) {
+                                            ?>
+                                                <div class="swiper-slide">
+                                                    <article class="vlt-project">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                <h3 class="vlt-project-title"><?php echo $value["title"]; ?><span class="has-accent-color">.</span></h3>
+                                                                <div class="vlt-project-excerpt">
+                                                                    <p><?php echo $value["description"]; ?></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <img src="assets/img/<?php echo $value["image"]; ?>" alt="" loading="lazy">
+                                                                <div class="vlt-gap-20"></div>
+                                                                <?php if (isset($value["direct_link"]) && !is_null($value["direct_link"])) {
 
-                                                <article class="vlt-project">
-                                                    <div class="col-md-12">
-                                                        <div class="col-md-6">
-                                                            <h3 class="vlt-project-title">Wordpress Project<span class="has-accent-color">.</span></h3>
-                                                            <div class="vlt-project-excerpt">
-                                                                <p>WordPress website design and development for a upvc
-                                                                    window
-                                                                    shop.</p>
+
+                                                                ?>
+                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["direct_link"]; ?>" target="_blank">See
+                                                                        Project </a> <?php
+                                                                                    }
+                                                                                    if (isset($value["github_link"]) && !is_null($value["github_link"])) {
+                                                                                        ?>
+                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["github_link"]; ?>" target="_blank">See
+                                                                        Project in Github</a> <?php
+                                                                                            } ?>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <img src="assets/img/alumtechwin.png" alt="" loading="lazy">
-                                                            <div class="vlt-gap-20"></div>
-                                                            <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="https://alumtechwin.ir" target="_blank">See
-                                                                Project</a>
-                                                        </div>
-                                                    </div>
 
-                                                </article>
-                                            </div>
-                                            <div class="swiper-slide">
+                                                    </article>
+                                                </div>
 
-                                                <article class="vlt-project">
-                                                    <h3 class="vlt-project-title">The Bottle<span class="has-accent-color">.</span></h3>
-                                                    <div class="vlt-project-excerpt">
-                                                        <p>Working with client and community, we deliver masterplans
-                                                            that create vibrant new places and spaces, attract people,
-                                                            and encourage investment through.</p>
-                                                    </div>
-                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="single-product.html" target="_self">See Project</a>
-                                                </article>
-                                            </div>
-                                            <div class="swiper-slide">
+                                            <?php
+                                            }
+                                            ?>
+                                            <?php ?>
 
-                                                <article class="vlt-project">
-                                                    <h3 class="vlt-project-title">Aesop<span class="has-accent-color">.</span></h3>
-                                                    <div class="vlt-project-excerpt">
-                                                        <p>Third dry hath saying our over fruit Place creeping creepeth
-                                                            let Good. Created also darkness which open appear cattle
-                                                            Second shall brought wherein given. Moveth.</p>
-                                                    </div>
-                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="single-product.html" target="_self">See Project</a>
-                                                </article>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
