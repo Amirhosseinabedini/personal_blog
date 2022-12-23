@@ -94,7 +94,7 @@ $projects = $db->get('projects');
     <div class="vlt-offcanvas-menu">
         <div class="vlt-offcanvas-menu__header">
 
-            <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.php">Fa</a></div>
+            <!-- <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.php">Fa</a></div> -->
             <a class="vlt-menu-burger vlt-menu-burger--opened js-offcanvas-menu-close" href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
                     <defs />
                     <path d="M18 6L6 18M6 6l12 12" />
@@ -961,7 +961,7 @@ $projects = $db->get('projects');
         <div class="vlt-footer-copyright">
             <p>© <?php echo $basics["Copyright"]; ?></p>
         </div>
-        <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.php">Fa</a></div>
+        <!-- <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.php">Fa</a></div> -->
     </footer>
 
     <!-- <script data-cfasync="false" src="assets/scripts/email-decode.min.js"></script> -->
