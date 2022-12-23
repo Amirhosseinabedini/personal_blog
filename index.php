@@ -3,6 +3,10 @@
 require_once('connector/MysqliDb.php');
 require_once('connector/cn.php');
 
+// Start a Session
+if (!session_id()) @session_start();
+
+
 $basics = $db->getOne('basics_eng');
 $exp = $db->getOne('Experience');
 $db->where('status', 1);
@@ -171,10 +175,10 @@ $Certificates = $db->get('Certificates');
 
                                     <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
 
-                                        <div class="vlt-video-button"><a href="https://vimeo.com/367945766" data-fancybox data-small-btn="true" rel="nofollow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 27">
+                                        <!-- <div class="vlt-video-button"><a href="https://vimeo.com/367945766" data-fancybox data-small-btn="true" rel="nofollow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 27">
                                                     <defs />
                                                     <path fill="currentColor" d="M23.7471 13.2802L.876191 26.4847.876192.0757026 23.7471 13.2802z" />
-                                                </svg></a></div>
+                                                </svg></a></div> -->
                                     </div>
                                     <div class="vlt-gap-100"></div>
 
@@ -738,7 +742,7 @@ $Certificates = $db->get('Certificates');
                                                     }
                                                     ?>
 
- ّ
+                                                    ّ
                                                 </div>
                                             </div>
                                         </div>
@@ -928,7 +932,9 @@ $Certificates = $db->get('Certificates');
                                     <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
                                         <h4>If you have any questions or comments about me, <span class="has-accent-color">send me a message</span></h4>
                                         <div class="vlt-gap-20"></div>
-                                        <form class="vlt-contact-form" novalidate="novalidate">
+                                        <!-- 
+                                        <form action="send_email.php" method="post" class="vlt-contact-form" novalidate="novalidate"> -->
+                                        <form action="send_email.php" method="post" novalidate="novalidate">
                                             <div class="vlt-form-group">
                                                 <input type="text" id="name" name="name" required="required" placeholder="Your Name">
                                             </div>
@@ -938,11 +944,14 @@ $Certificates = $db->get('Certificates');
                                             <div class="vlt-form-group">
                                                 <textarea name="message" id="message" rows="3" placeholder="Message"></textarea>
                                             </div>
-                                            <div class="message success">Your message is successfully sent...</div>
-                                            <div class="message danger">Sorry something went wrong!</div>
-
-                                            <button class="vlt-btn vlt-btn--primary vlt-btn--md">Contact Me</button>
+                                            <!-- <div class="message success">Your message is successfully sent...</div>
+                                            <div class="message danger">Sorry something went wrong!</div> -->
+                                            <input type="submit" class="vlt-btn vlt-btn--primary vlt-btn--md" value="Contact Me">
+                                            <!-- <button class="vlt-btn vlt-btn--primary vlt-btn--md">Contact Me</button> -->
                                         </form>
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -968,5 +977,6 @@ $Certificates = $db->get('Certificates');
     <script src="assets/scripts/vlt-helpers.js"></script>
     <script src="assets/scripts/vlt-controllers.min.js"></script>
 </body>
+
 
 </html>
