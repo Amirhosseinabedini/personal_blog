@@ -3,18 +3,14 @@
 require_once('connector/MysqliDb.php');
 require_once('connector/cn.php');
 
-// Start a Session
-if (!session_id()) @session_start();
-
-
 $basics = $db->getOne('basics_eng');
-$exp = $db->getOne('Experience');
+$exp = $db->getOne('experience');
 $db->where('status', 1);
 $skills = $db->get('skills');
 $db->where('status', 1);
 $education = $db->get('education');
 $db->where('status', 1);
-$Certificates = $db->get('Certificates');
+$Certificates = $db->get('certificates');
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +92,7 @@ $Certificates = $db->get('Certificates');
     <div class="vlt-offcanvas-menu">
         <div class="vlt-offcanvas-menu__header">
 
-            <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.html">Fa</a></div>
+            <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.php">Fa</a></div>
             <a class="vlt-menu-burger vlt-menu-burger--opened js-offcanvas-menu-close" href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
                     <defs />
                     <path d="M18 6L6 18M6 6l12 12" />
@@ -968,7 +964,7 @@ $Certificates = $db->get('Certificates');
         <div class="vlt-footer-copyright">
             <p>© <?php echo $basics["Copyright"]; ?></p>
         </div>
-        <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.html">Fa</a></div>
+        <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.php">Fa</a></div>
     </footer>
 
     <!-- <script data-cfasync="false" src="assets/scripts/email-decode.min.js"></script> -->
