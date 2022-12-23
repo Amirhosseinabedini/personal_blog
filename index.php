@@ -934,15 +934,15 @@ $Certificates = $db->get('Certificates');
                                         <div class="vlt-gap-20"></div>
                                         <!-- 
                                         <form action="send_email.php" method="post" class="vlt-contact-form" novalidate="novalidate"> -->
-                                        <form action="send_email.php" method="post" novalidate="novalidate">
+                                        <form id="message-form" action="send_email.php" method="post" novalidate>
                                             <div class="vlt-form-group">
-                                                <input type="text" id="name" name="name" required="required" placeholder="Your Name">
+                                                <input id="name" type="text" name="name" required placeholder="Your Name">
                                             </div>
                                             <div class="vlt-form-group">
-                                                <input type="email" id="email" name="email" required="required" placeholder="Your Email">
+                                                <input type="email" id="email" name="email" required placeholder="Your Email">
                                             </div>
                                             <div class="vlt-form-group">
-                                                <textarea name="message" id="message" rows="3" placeholder="Message"></textarea>
+                                                <textarea name="message" id="message" rows="3" required placeholder="Message"></textarea>
                                             </div>
                                             <!-- <div class="message success">Your message is successfully sent...</div>
                                             <div class="message danger">Sorry something went wrong!</div> -->
@@ -971,12 +971,51 @@ $Certificates = $db->get('Certificates');
         <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.html">Fa</a></div>
     </footer>
 
-    <script data-cfasync="false" src="assets/scripts/email-decode.min.js"></script>
+    <!-- <script data-cfasync="false" src="assets/scripts/email-decode.min.js"></script> -->
     <script src="assets/vendors/jquery-3.5.1.min.js"></script>
     <script src="assets/scripts/vlt-plugins.min.js"></script>
     <script src="assets/scripts/vlt-helpers.js"></script>
     <script src="assets/scripts/vlt-controllers.min.js"></script>
-</body>
+    <!-- <script src='js/jquery.validate.min.js'></script> -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 
+    <script>
+        $("#message-form").validate({
+            errorClass: "error fail-alert",
+            validClass: "valid success-alert",
+            rules: {
+                name: {
+                    required: true,
+                    maxlength: 30,
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                message: {
+                    required: true,
+                },
+            },
+            messages: {
+                name: {
+                    // required: "نام خود را وارد کنید",
+                    // maxlength: "نام نمیتواند بیشتر از 30 کاراکتر باشد"
+
+                },
+                email: {
+                    // required: "ایمیل خود را وارد کنید",
+                    // email: "ایمیل خود را با فرمت صحیح وارد کنید"
+                    required: 'Email is required.',
+                    email: 'A valid email is required.'
+                },
+                message: {
+                    // required: "ایمیل خود را وارد کنید",
+                    // email: "ایمیل خود را با فرمت صحیح وارد کنید"
+                },
+            }
+        });
+    </script>
+</body>
 
 </html>
