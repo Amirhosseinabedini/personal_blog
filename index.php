@@ -9,6 +9,8 @@ $db->where('status', 1);
 $skills = $db->get('skills');
 $db->where('status', 1);
 $education = $db->get('education');
+$db->where('status', 1);
+$Certificates = $db->get('Certificates');
 ?>
 
 <!DOCTYPE html>
@@ -710,48 +712,33 @@ $education = $db->get('education');
                                         <div class="vlt-content-slider " data-navigation-anchor=".vlt-testimonials-anchor" data-effect="" data-gap="" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
                                             <div class="swiper-container">
                                                 <div class="swiper-wrapper">
-                                                    <div class="swiper-slide">
-                                                        <div class="col-xl-2"></div>
-                                                        <div class="col-xl-8">
-                                                            <a href="net+mft.jpg">
-                                                                <img src="assets/img/net+mft.jpg" class="img-thumbnail" alt="html_fanniherfeei" loading="lazy" style="width: 100%;">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-xl-2"></div>
-                                                        <div class="vlt-testimonial">
-                                                            <div class="vlt-testimonial__text">
-                                                                <p>Specialized training course and network
-                                                                    training class</p>
+
+                                                    <?php
+                                                    foreach ($Certificates as $key => $value) {
+                                                    ?>
+                                                        <div class="swiper-slide">
+                                                            <div class="col-xl-2"></div>
+                                                            <div class="col-xl-8">
+                                                                <a href="net+mft.jpg">
+                                                                    <img src="assets/img/<?php echo $value["img"]; ?>" class="img-thumbnail" alt="<?php echo $value["img"]; ?>" loading="lazy" style="width: 100%;">
+                                                                </a>
                                                             </div>
-                                                            <div class="vlt-testimonial__meta">
-                                                                <h5 class="vlt-testimonial__name">CompTIA Network+
-                                                                </h5>
-                                                                <div class="vlt-testimonial__function">Tehran Institute
-                                                                    of Technology
+                                                            <div class="col-xl-2"></div>
+                                                            <div class="vlt-testimonial">
+                                                                <div class="vlt-testimonial__text">
+                                                                    <p><?php echo $value["description"]; ?></p>
+                                                                </div>
+                                                                <div class="vlt-testimonial__meta">
+                                                                    <h5 class="vlt-testimonial__name"><?php echo $value["title"]; ?></h5>
+                                                                    <div class="vlt-testimonial__function"><?php echo $value["Institute"]; ?></div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <div class="col-xl-2"></div>
-                                                        <div class="col-xl-8">
-                                                            <a href="html_fanniherfeei.jpg">
-                                                                <img src="assets/img/html_fanniherfeei.jpg" class="img-thumbnail" alt="html_fanniherfeei" loading="lazy" style="width: 100%;">
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-xl-2"></div>
-                                                        <div class="vlt-testimonial">
-                                                            <div class="vlt-testimonial__text">
-                                                                <p>HTML Programmer for web design</p>
-                                                            </div>
-                                                            <div class="vlt-testimonial__meta">
-                                                                <h5 class="vlt-testimonial__name">HTML Programmer for
-                                                                    web design</h5>
-                                                                <div class="vlt-testimonial__function">Technical and
-                                                                    Vocational Training Organization. irantvto.ir</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>ّ
+                                                    <?php
+                                                    }
+                                                    ?>
+
+ ّ
                                                 </div>
                                             </div>
                                         </div>
