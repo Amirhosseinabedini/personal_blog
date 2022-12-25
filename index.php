@@ -60,13 +60,13 @@ $work_experiences = $db->get('work_experiences');
                                 </li>
                                 <li data-menuanchor="About"><a href="#About">About</a>
                                 </li>
-                                <li data-menuanchor="Projects"><a href="#Projects">Projects</a>
+                                <li data-menuanchor="work_experiences"><a href="#work_experiences">Work experiences</a>
                                 </li>
                                 <li data-menuanchor="Education"><a href="#Education">Education</a>
                                 </li>
-                                <li data-menuanchor="work_experiences"><a href="#work_experiences">Work experiences</a>
-                                </li>
                                 <li data-menuanchor="Testimonials"><a href="#Testimonials">Testimonials</a>
+                                </li>
+                                <li data-menuanchor="Projects"><a href="#Projects">Projects</a>
                                 </li>
                                 <!-- <li data-menuanchor="Partners"><a href="#Partners">Partners</a>
                                 </li> -->
@@ -105,23 +105,23 @@ $work_experiences = $db->get('work_experiences');
         <nav class="vlt-offcanvas-menu__navigation">
 
             <ul class="sf-menu">
-                <li data-menuanchor="Home"><a href="#Home">Home</a>
+                <li data-menuanchor="Home"><a style="width: 100%;" href="#Home">Home</a>
                 </li>
-                <li data-menuanchor="About"><a href="#About">About</a>
+                <li data-menuanchor="About"><a style="width: 100%;" href="#About">About</a>
                 </li>
-                <li data-menuanchor="Projects"><a href="#Projects">Projects</a>
+                <li data-menuanchor="work_experiences"><a style="width: 100%;" href="#work_experiences">Work experiences</a>
                 </li>
-                <li data-menuanchor="Education"><a href="#Education">Education</a>
+                <li data-menuanchor="Education"><a style="width: 100%;" href="#Education">Education</a>
                 </li>
-                <li data-menuanchor="work_experiences"><a href="#work_experiences">Work experiences</a>
+                <li data-menuanchor="Testimonials"><a style="width: 100%;" href="#Testimonials">Testimonials</a>
                 </li>
-                <li data-menuanchor="Testimonials"><a href="#Testimonials">Testimonials</a>
+                <li data-menuanchor="Projects"><a style="width: 100%;" href="#Projects">Projects</a>
                 </li>
-                <!-- <li data-menuanchor="Partners"><a href="#Partners">Partners</a>
-                </li> -->
-                <li data-menuanchor="Blog"><a href="#Blog">Blog</a>
+                <!-- <li data-menuanchor="Partners"><a style="width: 100%;" href="#Partners">Partners</a>
+                                </li> -->
+                <li data-menuanchor="Blog"><a style="width: 100%;" href="#Blog">Blog</a>
                 </li>
-                <li data-menuanchor="Contact"><a href="#Contact">Contact</a>
+                <li data-menuanchor="Contact"><a style="width: 100%;" href="#Contact">Contact</a>
                 </li>
             </ul>
         </nav>
@@ -202,7 +202,6 @@ $work_experiences = $db->get('work_experiences');
                 </div>
             </div>
 
-
             <div class="vlt-section pp-scrollable" data-anchor="About">
                 <div class="vlt-section__vertical-align">
                     <div class="vlt-section__content">
@@ -245,83 +244,6 @@ $work_experiences = $db->get('work_experiences');
                                     <?php
                                     }
                                     ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="vlt-section pp-scrollable" data-anchor="Projects">
-                <div class="vlt-section__vertical-align">
-                    <div class="vlt-section__content">
-
-                        <div class="vlt-section__projects-background">
-                            <img class="is-active" src="assets/img/project-01.jpg" alt="" loading="lazy">
-                            <img src="assets/img/project-02.jpg" alt="" loading="lazy">
-                        </div>
-                        <div class="container">
-                            <div class="vlt-gap-100"></div>
-
-                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
-
-                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-projects-anchor" data-effect="fade" data-gap="" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
-                                    <div class="swiper-container">
-                                        <div class="swiper-wrapper">
-                                            <?php
-                                            foreach ($projects as $key => $value) {
-                                            ?>
-                                                <div class="swiper-slide">
-                                                    <article class="vlt-project">
-                                                        <div class="col-md-12">
-                                                            <div class="col-md-6">
-                                                                <h3 class="vlt-project-title"><?php echo $value["title"]; ?><span class="has-accent-color">.</span></h3>
-                                                                <div class="vlt-project-excerpt">
-                                                                    <p><?php echo $value["description"]; ?></p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <img src="assets/img/<?php echo $value["image"]; ?>" alt="" loading="lazy">
-                                                                <div class="vlt-gap-20"></div>
-                                                                <?php if (isset($value["direct_link"]) && !is_null($value["direct_link"])) {
-
-
-                                                                ?>
-                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["direct_link"]; ?>" target="_blank">See
-                                                                        Project </a> <?php
-                                                                                    }
-                                                                                    if (isset($value["github_link"]) && !is_null($value["github_link"])) {
-                                                                                        ?>
-                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["github_link"]; ?>" target="_blank">See
-                                                                        Project in Github</a> <?php
-                                                                                            } ?>
-                                                            </div>
-                                                        </div>
-
-                                                    </article>
-                                                </div>
-
-                                            <?php
-                                            }
-                                            ?>
-                                            <?php ?>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="vlt-gap-150"></div>
-
-                                <div class="vlt-slider-controls vlt-slider-controls--style-2 vlt-projects-anchor">
-                                    <div class="vlt-swiper-pagination"></div>
-                                    <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 45">
-                                            <defs />
-                                            <path fill="currentColor" fill-rule="evenodd" d="M1.36413 22.5795L24 43.9524l-.7271.6865L.272896 22.9223l.383716-.3623-.362754-.3367L23.0941.319721l.733.680233L1.36413 22.5795z" clip-rule="evenodd" />
-                                        </svg></div>
-                                    <div class="vlt-swiper-button-next"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 45">
-                                            <defs />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M22.6359 22.3728L0 1.00001.727101.313477 23.7271 22.0301l-.3837.3623.3627.3367L.905866 44.6327l-.732997-.6803L22.6359 22.3728z" fill="currentColor" />
-                                        </svg></div>
                                 </div>
                             </div>
                         </div>
@@ -490,7 +412,6 @@ $work_experiences = $db->get('work_experiences');
                 </div>
             </div>
 
-
             <div class="vlt-section pp-scrollable" data-anchor="Testimonials">
                 <div class="vlt-section__vertical-align">
                     <div class="vlt-section__content">
@@ -565,6 +486,88 @@ $work_experiences = $db->get('work_experiences');
                     </div>
                 </div>
             </div>
+
+
+            <div class="vlt-section pp-scrollable" data-anchor="Projects">
+                <div class="vlt-section__vertical-align">
+                    <div class="vlt-section__content">
+
+                        <div class="vlt-section__projects-background">
+                            <img class="is-active" src="assets/img/project-01.jpg" alt="" loading="lazy">
+                            <img src="assets/img/project-02.jpg" alt="" loading="lazy">
+                        </div>
+                        <div class="container">
+                            <div class="vlt-gap-100"></div>
+
+                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
+
+                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-projects-anchor" data-effect="fade" data-gap="" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
+                                    <div class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <?php
+                                            foreach ($projects as $key => $value) {
+                                            ?>
+                                                <div class="swiper-slide">
+                                                    <article class="vlt-project">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                <h3 class="vlt-project-title"><?php echo $value["title"]; ?><span class="has-accent-color">.</span></h3>
+                                                                <div class="vlt-project-excerpt">
+                                                                    <p><?php echo $value["description"]; ?></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <img src="assets/img/<?php echo $value["image"]; ?>" alt="" loading="lazy">
+                                                                <div class="vlt-gap-20"></div>
+                                                                <?php if (isset($value["direct_link"]) && !is_null($value["direct_link"])) {
+
+
+                                                                ?>
+                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["direct_link"]; ?>" target="_blank">See
+                                                                        Project </a> <?php
+                                                                                    }
+                                                                                    if (isset($value["github_link"]) && !is_null($value["github_link"])) {
+                                                                                        ?>
+                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["github_link"]; ?>" target="_blank">See
+                                                                        Project in Github</a> <?php
+                                                                                            } ?>
+                                                            </div>
+                                                        </div>
+
+                                                    </article>
+                                                </div>
+
+                                            <?php
+                                            }
+                                            ?>
+                                            <?php ?>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="vlt-gap-150"></div>
+
+                                <div class="vlt-slider-controls vlt-slider-controls--style-2 vlt-projects-anchor">
+                                    <div class="vlt-swiper-pagination"></div>
+                                    <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 45">
+                                            <defs />
+                                            <path fill="currentColor" fill-rule="evenodd" d="M1.36413 22.5795L24 43.9524l-.7271.6865L.272896 22.9223l.383716-.3623-.362754-.3367L23.0941.319721l.733.680233L1.36413 22.5795z" clip-rule="evenodd" />
+                                        </svg></div>
+                                    <div class="vlt-swiper-button-next"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 45">
+                                            <defs />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M22.6359 22.3728L0 1.00001.727101.313477 23.7271 22.0301l-.3837.3623.3627.3367L.905866 44.6327l-.732997-.6803L22.6359 22.3728z" fill="currentColor" />
+                                        </svg></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
 
             <!-- 
             <div class="vlt-section pp-scrollable" data-anchor="Partners">
