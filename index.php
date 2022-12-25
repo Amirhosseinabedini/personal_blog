@@ -13,6 +13,8 @@ $db->where('status', 1);
 $Certificates = $db->get('certificates');
 $db->where('status', 1);
 $projects = $db->get('projects');
+$db->where('status', 1);
+$work_experiences = $db->get('work_experiences');
 ?>
 
 <!DOCTYPE html>
@@ -62,8 +64,8 @@ $projects = $db->get('projects');
                                 </li>
                                 <li data-menuanchor="Education"><a href="#Education">Education</a>
                                 </li>
-                                <!-- <li data-menuanchor="WORK_EXPERIENCES"><a href="#WORK_EXPERIENCES">WORK EXPERIENCES</a>
-                                </li> -->
+                                <li data-menuanchor="work_experiences"><a href="#work_experiences">Work experiences</a>
+                                </li>
                                 <li data-menuanchor="Testimonials"><a href="#Testimonials">Testimonials</a>
                                 </li>
                                 <!-- <li data-menuanchor="Partners"><a href="#Partners">Partners</a>
@@ -111,8 +113,8 @@ $projects = $db->get('projects');
                 </li>
                 <li data-menuanchor="Education"><a href="#Education">Education</a>
                 </li>
-                <!-- <li data-menuanchor="WORK_EXPERIENCES"><a href="#WORK_EXPERIENCES">WORK EXPERIENCES</a>
-                </li> -->
+                <li data-menuanchor="work_experiences"><a href="#work_experiences">Work experiences</a>
+                </li>
                 <li data-menuanchor="Testimonials"><a href="#Testimonials">Testimonials</a>
                 </li>
                 <!-- <li data-menuanchor="Partners"><a href="#Partners">Partners</a>
@@ -243,9 +245,6 @@ $projects = $db->get('projects');
                                     <?php
                                     }
                                     ?>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -329,7 +328,8 @@ $projects = $db->get('projects');
                     </div>
                 </div>
             </div>
-            <!-- <div class="vlt-section pp-scrollable" data-anchor="Work Experiences">
+
+            <div class="vlt-section pp-scrollable" data-anchor="work_experiences">
                 <div class="vlt-section__vertical-align">
                     <div class="vlt-section__content">
                         <div class="container">
@@ -337,7 +337,7 @@ $projects = $db->get('projects');
 
                             <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
                                 <div class="d-block d-md-flex align-items-center justify-content-between">
-                                    <h3>WORK EXPERIENCES</h3>
+                                    <h3>Work experiences</h3>
                                     <div class="vlt-gap-30--sm"></div>
                                     <form action="download.php" method="post">
                                         <input class="vlt-btn vlt-btn--primary vlt-btn--md" type="submit" name="submit" value="Download
@@ -350,141 +350,57 @@ $projects = $db->get('projects');
 
                             <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
 
-                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-education-anchor" data-effect="" data-gap="120" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
+                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-work_experiences-anchor" data-effect="" data-gap="120" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
                                     <div class="swiper-container">
                                         <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <?php
-                                                foreach ($education as $key => $value) {
-                                                ?>
 
+                                            <?php
+                                            foreach ($work_experiences as $key => $value) {
+                                            ?>
+                                                <div class="swiper-slide">
                                                     <div class="vlt-timeline-item">
                                                         <div class="row">
-                                                            <div class="col-xl-4"><img src="assets/img/root/<?php echo $value["institute_logo"]; ?>" alt="rouzbahan-logo" loading="lazy" style="
-                                                                width: 30%;">
-                                                            </div>
-                                                            <div class="col-xl-4"><span class="vlt-timeline-item__date"><?php echo $value["start_date"]; ?> ‑ <?php echo $value["end_date"]; ?></span>
-                                                                <h5 class="vlt-timeline-item__title"><?php echo $value["institute_name"]; ?>
+                                                            <div class="col-xl-6">
+                                                                <h5 class="vlt-timeline-item__title"><?php echo $value["position"]; ?>
                                                                 </h5>
+                                                                <h6 class="vlt-timeline-item__title"><?php echo $value["Company"]; ?>
+                                                                </h6>
+                                                                <span class="vlt-timeline-item__date"><?php echo $value["start_date"]; ?> ‑ <?php echo $value["end_date"]; ?></span>
+                                                                <span class="vlt-timeline-item__date"><?php echo $value["location"]; ?></span>
                                                             </div>
                                                             <div class="col-xl-4">
-                                                                <p class="vlt-timeline-item__text"><?php echo $value["degree_name"]; ?>
-                                                                    <hr>
-                                                                    <?php echo $value["resume"]; ?>
+                                                                <h5>Tasks:</h5>
+                                                                <p class="vlt-timeline-item__text"><?php echo $value["tasks"]; ?>
+                                                                    <!-- <hr>
+                                                                    <?php echo $value["resume"]; ?> -->
                                                                 </p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                <?php
+                                                            <div class="col-xl-2">
+                                                                <?php
+                                                                if (isset($value["work_certificate_img"])) {
+                                                                    if (file_exists("assets/img/" . $value["work_certificate_img"])) {
+                                                                ?>
+                                                                        <a href="assets/img/<?php echo $value["work_certificate_img"]; ?>">
+                                                                            <img src="assets/img/<?php echo $value["work_certificate_img"]; ?>" class="img-thumbnail" alt="<?php echo $value["work_certificate_img"]; ?>" loading="lazy" style="width: 100%;">
+                                                                        </a>
+                                                                <?php
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </div>
 
-                                                }
-                                                ?>
-
-
-                                            </div>
-                                            <div class="swiper-slide">
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/rouzbahan-logo.png" alt="rouzbahan-logo" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2019
-                                                                - 2020</span>
-                                                            <h5 class="vlt-timeline-item__title">rouzbahan-logo</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Which firmament dominion
-                                                                first rule and tree. The seas he i were cattle Under
-                                                                living. It may beast every forth place.</p>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/envato.png" alt="Envato" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2017
-                                                                - 2018</span>
-                                                            <h5 class="vlt-timeline-item__title">Envato</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Rule bearing whales.
-                                                                Created gathering blessed, sixth likeness male. Over
-                                                                were which you'll so be make moveth made saw above.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/twitter.png" alt="Twitter" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2015
-                                                                - 2018</span>
-                                                            <h5 class="vlt-timeline-item__title">Twitter</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Firmament itself rule
-                                                                their evening, which moved very night so great them
-                                                                cattle bearing and gathered forth had whose bearing.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/rouzbahan-logo.png" alt="rouzbahan-logo" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2018/09 ‑ 2022/11</span>
-                                                            <h5 class="vlt-timeline-item__title">Rouzbahan University</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">BEng Computer Science</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/envato.png" alt="Envato" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2017
-                                                                - 2018</span>
-                                                            <h5 class="vlt-timeline-item__title">Envato</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Rule bearing whales.
-                                                                Created gathering blessed, sixth likeness male. Over
-                                                                were which you'll so be make moveth made saw above.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/twitter.png" alt="Twitter" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2015
-                                                                - 2018</span>
-                                                            <h5 class="vlt-timeline-item__title">Twitter</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Firmament itself rule
-                                                                their evening, which moved very night so great them
-                                                                cattle bearing and gathered forth had whose bearing.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="vlt-gap-75"></div>
 
-                                <div class="vlt-slider-controls vlt-slider-controls--style-2 vlt-education-anchor">
+                                <div class="vlt-slider-controls vlt-slider-controls--style-2 vlt-work_experiences-anchor">
                                     <div class="vlt-swiper-pagination"></div>
                                     <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 45">
                                             <defs />
@@ -500,8 +416,6 @@ $projects = $db->get('projects');
                     </div>
                 </div>
             </div>
- -->
-
 
             <div class="vlt-section pp-scrollable" data-anchor="Education">
                 <div class="vlt-section__vertical-align">
@@ -534,7 +448,7 @@ $projects = $db->get('projects');
 
                                                     <div class="vlt-timeline-item">
                                                         <div class="row">
-                                                            <div class="col-xl-4"><img src="assets/img/root/<?php echo $value["institute_logo"]; ?>" alt="rouzbahan-logo" loading="lazy" style="
+                                                            <div class="col-xl-4"><img src="assets/img/root/<?php echo $value["institute_logo"]; ?>" alt="<?php echo $value["institute_logo"]; ?>" loading="lazy" style="
                                                                 width: 30%;">
                                                             </div>
                                                             <div class="col-xl-4"><span class="vlt-timeline-item__date"><?php echo $value["start_date"]; ?> ‑ <?php echo $value["end_date"]; ?></span>
@@ -553,114 +467,7 @@ $projects = $db->get('projects');
 
                                                 }
                                                 ?>
-
-
                                             </div>
-                                            <!-- <div class="swiper-slide">
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img
-                                                                src="assets/img/root/rouzbahan-logo.png" alt="rouzbahan-logo"
-                                                                loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2019
-                                                                - 2020</span>
-                                                            <h5 class="vlt-timeline-item__title">rouzbahan-logo</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Which firmament dominion
-                                                                first rule and tree. The seas he i were cattle Under
-                                                                living. It may beast every forth place.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/envato.png"
-                                                                alt="Envato" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2017
-                                                                - 2018</span>
-                                                            <h5 class="vlt-timeline-item__title">Envato</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Rule bearing whales.
-                                                                Created gathering blessed, sixth likeness male. Over
-                                                                were which you'll so be make moveth made saw above.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/twitter.png"
-                                                                alt="Twitter" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2015
-                                                                - 2018</span>
-                                                            <h5 class="vlt-timeline-item__title">Twitter</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Firmament itself rule
-                                                                their evening, which moved very night so great them
-                                                                cattle bearing and gathered forth had whose bearing.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img
-                                                                src="assets/img/root/rouzbahan-logo.png" alt="rouzbahan-logo"
-                                                                loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2018/09 ‑ 2022/11</span>
-                                                            <h5 class="vlt-timeline-item__title">Rouzbahan University</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">BEng Computer Science</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/envato.png"
-                                                                alt="Envato" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2017
-                                                                - 2018</span>
-                                                            <h5 class="vlt-timeline-item__title">Envato</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Rule bearing whales.
-                                                                Created gathering blessed, sixth likeness male. Over
-                                                                were which you'll so be make moveth made saw above.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="vlt-timeline-item">
-                                                    <div class="row">
-                                                        <div class="col-xl-4"><img src="assets/img/root/twitter.png"
-                                                                alt="Twitter" loading="lazy">
-                                                        </div>
-                                                        <div class="col-xl-4"><span class="vlt-timeline-item__date">2015
-                                                                - 2018</span>
-                                                            <h5 class="vlt-timeline-item__title">Twitter</h5>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <p class="vlt-timeline-item__text">Firmament itself rule
-                                                                their evening, which moved very night so great them
-                                                                cattle bearing and gathered forth had whose bearing.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -716,7 +523,7 @@ $projects = $db->get('projects');
                                                         <div class="swiper-slide">
                                                             <div class="col-xl-2"></div>
                                                             <div class="col-xl-8">
-                                                                <a href="net+mft.jpg">
+                                                                <a href="assets/img/<?php echo $value["img"]; ?>">
                                                                     <img src="assets/img/<?php echo $value["img"]; ?>" class="img-thumbnail" alt="<?php echo $value["img"]; ?>" loading="lazy" style="width: 100%;">
                                                                 </a>
                                                             </div>
