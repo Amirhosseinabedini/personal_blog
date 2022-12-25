@@ -94,5 +94,9 @@ if (isset($_POST)) {
 		// } else {
 		// 	echo "22222222";
 		// }
+	}else{
+		header("Location: index.php");
 	}
+}else{
+	header("Location: index.php");
 }
