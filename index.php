@@ -15,6 +15,7 @@ $db->where('status', 1);
 $projects = $db->get('projects');
 $db->where('status', 1);
 $work_experiences = $db->get('work_experiences');
+
 ?>
 
 <!DOCTYPE html>

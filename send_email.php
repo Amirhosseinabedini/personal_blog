@@ -1,4 +1,8 @@
 <?php
+include "PHPMailer/class.phpmailer.php";
+$_POST["name"]="amir";
+$_POST["email"] = "abedinia313@gmail.com";
+$_POST["message"] = "first message";
 
 if (isset($_POST)) {
 	if (isset($_POST["name"]) & isset($_POST["email"]) & isset($_POST["message"])) {
@@ -18,21 +22,17 @@ if (isset($_POST)) {
 		$id = $db->insert('messege', $data);
 		if ($id) {
 			header("Location: index.php?msg=sent#Contact");
+			// var_dump(3333);
+
 		} else {
 			header("Location: index.php?msg=errmsg#Contact");
+			// var_dump(4444);
+
 		}
 
 
-		// require_once('PHPMailer/class.phpmailer.php');
-		// require_once('PHPMailer/class.smtp.php');
 
-		// use PHPMailer\PHPMailer\PHPMailer;
-		// use PHPMailer\PHPMailer\SMTP;
-		// use PHPMailer\PHPMailer\Exception;
-
-
-
-		// $mail = new PHPMailer(true);
+		// $mail=new PHPMailer(true);
 		// $mail->IsSMTP();
 		// try
 		// {
@@ -40,18 +40,16 @@ if (isset($_POST)) {
 		// 	$mail->SMTPAuth=true;
 		// 	$mail->SMTPSecure="ssl";
 		// 	$mail->Port=465;
-		// 	$mail->Username="abedinia313@gmail.com";
-		// 	$mail->Password="2080642359";
-		// 	$mail->AddAddress($tested["email"]);
-		// 	$mail->SetFrom("abedinia313@gmail.com","پروژه پنل ادمین ");
-		// 	$mail->Subject='';
+		// 	$mail->Username="abediniamirhossein1996@gmail.com";
+		// 	$mail->Password="Amirr512@";
+		// 	$mail->AddAddress($_POST["email"]);
+		// 	$mail->SetFrom("abediniamirhossein1996@gmail.com","پروژه پنل ادمین ");
+		// 	$mail->Subject='فعال سازی حساب کاربری';
 		// 	$mail->CharSet="UTF-8";
 		// 	$mail->ContentType="text/htm";
-		// 	$mail->MsgHTML('salaaaaaaaaaaaaaaaaaaaaaaaaaaaam');
+		// 	$mail->MsgHTML('1111111111111111111111111111');
 		// 	$mail->Send();
 		// 	// header("Location: activation_check.php");
-
-
 		// }
 		// catch(phpmailerException $e)
 		// {
@@ -59,44 +57,16 @@ if (isset($_POST)) {
 		// }
 		// catch(Exception $e)
 		// {
-		// 	echo $e->getMessage();
+		// 	echo $mail->ErrorInfo;
 		// }
-
-		// 	$mail->SMTPDebug = 1;
-		// 	$mail->SMTPAuth = true;
-		// 	$mail->SMTPSecure = "tls";
-		// 	$mail->Port = 587;
-		// 	$mail->Host = "smtp.gmail.com";
-		// 	$mail->Username = "abediniamirhossein1996@gmail.com";
-		// 	$mail->Password = "Amirr512@";
-
-		// 	$mail->From = "abediniamirhossein1996@gmail.com";
-		// 	$mail->FromName = "Amirabedini";
-
-		// 	$mail->addAddress("abedinia313@gmail.com", "<destination name>");
-
-		// 	$mail->isHTML(true);
-
-		// 	$mail->Subject = "Mailing with PHPMailer";
-		// 	$mail->Body = "<b>Congratulation</b>";
-		// 	$mail->AltBody = "Congratulation";
-
-		// 	try {
-		// 		$mail->send();
-		// 		echo "Message has been sent successfully";
-		// 		die;
-		// 		header("Location: index.php#Contact");
-		// 	} catch (Exception $e) {
-		// 		echo "Mailer Error: " . $mail->ErrorInfo;
-		// 		die;
-		// 		header("Location: index.php#Contact");
-		// 	}
-		// } else {
-		// 	echo "22222222";
-		// }
+		
+		
 	}else{
 		header("Location: index.php");
+		// var_dump(11111);
 	}
 }else{
 	header("Location: index.php");
+	// var_dump(22222);
+
 }
