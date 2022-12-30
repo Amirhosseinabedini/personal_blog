@@ -10,12 +10,95 @@ $skills = $db->get('skills');
 $db->where('status', 1);
 $education = $db->get('education');
 $db->where('status', 1);
+$db->orderBy("ordered", "asc");
 $Certificates = $db->get('certificates');
 $db->where('status', 1);
 $projects = $db->get('projects');
 $db->where('status', 1);
 $work_experiences = $db->get('work_experiences');
 
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+function getOS()
+{
+
+    global $user_agent;
+
+    $os_platform  = "Unknown OS Platform";
+
+    $os_array     = array(
+        '/windows nt 10/i'      =>  'Windows 10',
+        '/windows nt 6.3/i'     =>  'Windows 8.1',
+        '/windows nt 6.2/i'     =>  'Windows 8',
+        '/windows nt 6.1/i'     =>  'Windows 7',
+        '/windows nt 6.0/i'     =>  'Windows Vista',
+        '/windows nt 5.2/i'     =>  'Windows Server 2003/XP x64',
+        '/windows nt 5.1/i'     =>  'Windows XP',
+        '/windows xp/i'         =>  'Windows XP',
+        '/windows nt 5.0/i'     =>  'Windows 2000',
+        '/windows me/i'         =>  'Windows ME',
+        '/win98/i'              =>  'Windows 98',
+        '/win95/i'              =>  'Windows 95',
+        '/win16/i'              =>  'Windows 3.11',
+        '/macintosh|mac os x/i' =>  'Mac OS X',
+        '/mac_powerpc/i'        =>  'Mac OS 9',
+        '/linux/i'              =>  'Linux',
+        '/ubuntu/i'             =>  'Ubuntu',
+        '/iphone/i'             =>  'iPhone',
+        '/ipod/i'               =>  'iPod',
+        '/ipad/i'               =>  'iPad',
+        '/android/i'            =>  'Android',
+        '/blackberry/i'         =>  'BlackBerry',
+        '/webos/i'              =>  'Mobile'
+    );
+
+    foreach ($os_array as $regex => $value)
+        if (preg_match($regex, $user_agent))
+            $os_platform = $value;
+
+    return $os_platform;
+}
+
+function getBrowser()
+{
+
+    global $user_agent;
+
+    $browser        = "Unknown Browser";
+
+    $browser_array = array(
+        '/msie/i'      => 'Internet Explorer',
+        '/firefox/i'   => 'Firefox',
+        '/safari/i'    => 'Safari',
+        '/chrome/i'    => 'Chrome',
+        '/edge/i'      => 'Edge',
+        '/opera/i'     => 'Opera',
+        '/netscape/i'  => 'Netscape',
+        '/maxthon/i'   => 'Maxthon',
+        '/konqueror/i' => 'Konqueror',
+        '/mobile/i'    => 'Handheld Browser'
+    );
+
+    foreach ($browser_array as $regex => $value)
+        if (preg_match($regex, $user_agent))
+            $browser = $value;
+
+    return $browser;
+}
+
+$user_browser = "null";
+$user_os = "null";
+$v_ip = $_SERVER['REMOTE_ADDR'];
+$user_os        = getOS();
+$user_browser   = getBrowser();
+$date = new DateTime("now", new DateTimeZone('Iran'));
+$data = array(
+    "browser" => $user_browser,
+    "operating_system" => $user_os,
+    "ip" => $v_ip,
+    "setdate" => $date->format('Y-m-d H:i:s')
+);
+$id = $db->insert('visitor_data', $data);
 ?>
 
 <!DOCTYPE html>
@@ -457,6 +540,11 @@ $work_experiences = $db->get('work_experiences');
                                                                 <div class="vlt-testimonial__meta">
                                                                     <h5 class="vlt-testimonial__name"><?php echo $value["title"]; ?></h5>
                                                                     <div class="vlt-testimonial__function"><?php echo $value["Institute"]; ?></div>
+                                                                    <?php if (isset($value["Proof_link"]) && !is_null($value["Proof_link"])) {
+                                                                                        ?>
+                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["Proof_link"]; ?>" target="_blank">
+                                                                    Proof link</a> <?php
+                                                                                            } ?>
                                                                 </div>
                                                             </div>
                                                         </div>
