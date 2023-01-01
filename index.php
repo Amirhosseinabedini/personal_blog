@@ -133,7 +133,19 @@ $id = $db->insert('visitor_data', $data);
             <div class="vlt-navbar-background"></div>
             <div class="vlt-navbar-inner">
                 <div class="vlt-navbar-inner--left">
-                    <a class="vlt-navbar-logo" href="index.html"><img src="assets/img/root/<?php echo $basics["logo_pic"]; ?>" alt="Amir"></a>
+                    <a class="vlt-navbar-logo" href="index.php">
+                        <?php
+                        if (file_exists("assets/img/root/" . $basics["logo_pic"])) {
+                        ?>
+                            <img src="assets/img/root/<?php echo $basics["logo_pic"]; ?>" alt="Amir">
+                        <?php
+                        } else {
+                        ?>
+                            <img src="assets/img/root/No_Image_Available.jpg" alt="Amir">
+                        <?php
+                        }
+                        ?>
+                    </a>
                 </div>
                 <div class="vlt-navbar-inner--center">
                     <div class="container">
@@ -180,7 +192,7 @@ $id = $db->insert('visitor_data', $data);
     <div class="vlt-offcanvas-menu">
         <div class="vlt-offcanvas-menu__header">
 
-            <!-- <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.php">Fa</a></div> -->
+            <!-- <div class="vlt-language-switcher"><a class="is-active" href="index.php">Eng</a><a href="index - fa.php">Fa</a></div> -->
             <a class="vlt-menu-burger vlt-menu-burger--opened js-offcanvas-menu-close" href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
                     <defs />
                     <path d="M18 6L6 18M6 6l12 12" />
@@ -541,10 +553,10 @@ $id = $db->insert('visitor_data', $data);
                                                                     <h5 class="vlt-testimonial__name"><?php echo $value["title"]; ?></h5>
                                                                     <div class="vlt-testimonial__function"><?php echo $value["Institute"]; ?></div>
                                                                     <?php if (isset($value["Proof_link"]) && !is_null($value["Proof_link"])) {
-                                                                                        ?>
-                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["Proof_link"]; ?>" target="_blank">
-                                                                    Proof link</a> <?php
-                                                                                            } ?>
+                                                                    ?>
+                                                                        <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["Proof_link"]; ?>" target="_blank">
+                                                                            verify</a> <?php
+                                                                                    } ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -709,7 +721,9 @@ $id = $db->insert('visitor_data', $data);
                                             <div class="vlt-post-content">
                                                 <header class="vlt-post-header"><span class="vlt-post-date">December 27,
                                                         2020</span>
-                                                    <h3 class="vlt-post-title"><a href="single-post.html">Scent in the
+                                                    <!-- <h3 class="vlt-post-title"><a href="single-post.php">Scent in the
+                                                            Voyages</a></h3> -->
+                                                    <h3 class="vlt-post-title"><a href="#">Scent in the
                                                             Voyages</a></h3>
                                                 </header>
                                                 <div class="vlt-post-excerpt">
@@ -718,7 +732,8 @@ $id = $db->insert('visitor_data', $data);
                                                         so. Said be fruitful first lights creeping deep void, lesser.
                                                     </p>
                                                 </div>
-                                                <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.html">
+                                                <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
+                                                <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="#">
                                                         Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
                                                             <defs />
                                                             <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
@@ -738,7 +753,9 @@ $id = $db->insert('visitor_data', $data);
                                             <div class="vlt-post-content">
                                                 <header class="vlt-post-header"><span class="vlt-post-date">December 27,
                                                         2020</span>
-                                                    <h3 class="vlt-post-title"><a href="single-post.html">The Stone of
+                                                    <!-- <h3 class="vlt-post-title"><a href="single-post.php">The Stone of
+                                                            the Flames</a></h3> -->
+                                                    <h3 class="vlt-post-title"><a href="#">The Stone of
                                                             the Flames</a></h3>
                                                 </header>
                                                 <div class="vlt-post-excerpt">
@@ -747,7 +764,8 @@ $id = $db->insert('visitor_data', $data);
                                                         so. Said be fruitful first lights creeping deep void, lesser.
                                                     </p>
                                                 </div>
-                                                <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.html">
+                                                <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
+                                                <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="#">
                                                         Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
                                                             <defs />
                                                             <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
@@ -767,7 +785,9 @@ $id = $db->insert('visitor_data', $data);
                                             <div class="vlt-post-content">
                                                 <header class="vlt-post-header"><span class="vlt-post-date">December 27,
                                                         2020</span>
-                                                    <h3 class="vlt-post-title"><a href="single-post.html">Secrets of the
+                                                    <!-- <h3 class="vlt-post-title"><a href="single-post.php">Secrets of the
+                                                            Serpents</a></h3>                                                     -->
+                                                    <h3 class="vlt-post-title"><a href="#">Secrets of the
                                                             Serpents</a></h3>
                                                 </header>
                                                 <div class="vlt-post-excerpt">
@@ -776,7 +796,8 @@ $id = $db->insert('visitor_data', $data);
                                                         so. Said be fruitful first lights creeping deep void, lesser.
                                                     </p>
                                                 </div>
-                                                <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.html">
+                                                <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
+                                                <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="#">
                                                         Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
                                                             <defs />
                                                             <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
@@ -860,7 +881,7 @@ $id = $db->insert('visitor_data', $data);
         <div class="vlt-footer-copyright">
             <p>© <?php echo $basics["Copyright"]; ?></p>
         </div>
-        <!-- <div class="vlt-language-switcher"><a class="is-active" href="index.html">Eng</a><a href="index - fa.php">Fa</a></div> -->
+        <!-- <div class="vlt-language-switcher"><a class="is-active" href="index.php">Eng</a><a href="index - fa.php">Fa</a></div> -->
     </footer>
 
     <!-- <script data-cfasync="false" src="assets/scripts/email-decode.min.js"></script> -->
