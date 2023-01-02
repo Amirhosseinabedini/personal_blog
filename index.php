@@ -928,6 +928,17 @@ $id = $db->insert('visitor_data', $data);
                 },
             }
         });
+
+        // $(document).ready(function() {
+        //     v_ip = "https://api.iplocation.net?ip=";
+        //     v_ip = v_ip +"<?php echo $v_ip ?>";
+        //     console.log(v_ip);
+        //     $.get(v_ip, function() {
+        //         // alert("Data: " + data + "\nStatus: " + status);
+        //         console.log(data);
+        //     });
+            
+        // });
     </script>
 </body>
 
