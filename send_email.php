@@ -8,54 +8,21 @@ if (isset($_POST)) {
 			require_once('connector/MysqliDb.php');
 			require_once('connector/cn.php');
 			$date = new DateTime("now", new DateTimeZone('Iran'));
-			require_once('PHPMailer/class.phpmailer.php');
 
-			$mail=new PHPMailer(true);
-			$mail->IsSMTP();
-			try
-			{
-				$mail->Host='localhost';
-				$mail->SMTPAuth=true;
-				$mail->SMTPSecure="ssl";
-				$mail->Port=465;
-				$mail->Username="admin@amirabedini.net";
-				$mail->Password="Amirr512@";
-				$mail->AddAddress("abediniamirhossein96@gmail.com");
-				$mail->SetFrom("admin@amirabedini.net","پروژه پنل ادمین ");
-				$mail->Subject='فعال سازی حساب کاربری';
-				$mail->CharSet="UTF-8";
-				$mail->ContentType="text/htm";
-				$mail->MsgHTML('<p align="right"><a href="http://localhost/webclass/project/activation_check.php?do=active&code=">برای فعال سازی حساب کلیک نمایید!</a></p><br><h3>کد فعال سازی شما</h3><br><h1></h1>');
-				$mail->Send();
-				// echo '<font color="#00CC00" size="2" face="tahoma">شما ثبت نام شدید برای فعال سازی حساب ایمیل خود را بازبینی کنید </font>';
-				header("Location: activation_check.php");
+			$data = array(
+				"name" => $_POST["name"],
+				"email" => $_POST["email"],
+				"messege" => $_POST["message"],
+				"setdate" => $date->format('Y-m-d H:i:s'),
+				"ip" => $_SERVER['REMOTE_ADDR'],
+				"answer_status" => '0'
+			);
+			$id = $db->insert('messege', $data);
+			if ($id) {
+				header("Location: index.php?err=11#Contact");
+			} else {
+				header("Location: index.php?err=12#Contact");
 			}
-			catch(phpmailerException $e)
-			{
-				echo $e->errorMessage();
-			}
-			catch(Exception $e)
-			{
-				echo $e->getMessage();
-			}
-			
-
-
-
-			// $data = array(
-			// 	"name" => $_POST["name"],
-			// 	"email" => $_POST["email"],
-			// 	"messege" => $_POST["message"],
-			// 	"setdate" => $date->format('Y-m-d H:i:s'),
-			// 	"ip" => $_SERVER['REMOTE_ADDR'],
-			// 	"answer_status" => '0'
-			// );
-			// $id = $db->insert('messege', $data);
-			// if ($id) {
-			// 	header("Location: index.php?err=11#Contact");
-			// } else {
-			// 	header("Location: index.php?err=12#Contact");
-			// }
 
 
 			// require_once('PHPMailer/class.phpmailer.php');
@@ -129,15 +96,6 @@ if (isset($_POST)) {
 			// } else {
 			// 	echo "22222222";
 			// }
-
-
-
-
-
-
-
-
-
 		} else {
 			header("Location: index.php");
 		}
