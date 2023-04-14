@@ -18,6 +18,26 @@ $work_experiences = $db->get('work_experiences');
 
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
+if (isset($_GET["err"])) {
+    $err = $_GET["err"];
+} else {
+    $err = 0;
+}
+
+
+// Make the page validate
+ini_set('session.use_trans_sid', '0');
+
+// Include the random string file
+require 'captcha/rand.php';
+
+// Begin the session
+session_start();
+
+// Set the session contents
+$_SESSION['captcha_id'] = $str;
+
+
 function getOS()
 {
 
@@ -124,6 +144,13 @@ $id = $db->insert('visitor_data', $data);
 
     <link rel="stylesheet" href="assets/css/vlt-main.min.css">
 
+    <!-- captcha  -->
+
+    <script src="captcha/../../lib/jquery.js"></script>
+    <script src="captcha/../../dist/jquery.validate.js"></script>
+    <script src="captcha/captcha.js"></script>
+
+
     <!-- <link rel="stylesheet" href="assets/css/custom.css"> -->
 </head>
 
@@ -137,13 +164,13 @@ $id = $db->insert('visitor_data', $data);
                     <a class="vlt-navbar-logo" href="index.php">
                         <?php
                         if (file_exists("assets/img/root/" . $basics["logo_pic"])) {
-                            ?>
+                        ?>
                             <img src="assets/img/root/<?php echo $basics["logo_pic"]; ?>" alt="Amir">
-                            <?php
+                        <?php
                         } else {
-                            ?>
+                        ?>
                             <img src="assets/img/root/No_Image_Available.jpg" alt="Amir">
-                            <?php
+                        <?php
                         }
                         ?>
                     </a>
@@ -179,10 +206,7 @@ $id = $db->insert('visitor_data', $data);
                     <div class="d-flex align-items-center">
 
                         <div class="vlt-navbar-contacts"><a href="<?php echo $basics["tel"]; ?>"><?php echo $basics["tel"]; ?></a></div>
-                        <a class="vlt-menu-burger js-offcanvas-menu-open" href="#"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"
-                                stroke-linejoin="round">
+                        <a class="vlt-menu-burger js-offcanvas-menu-open" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="round">
                                 <line x1="3" y1="12" x2="21" y2="12" />
                                 <line x1="3" y1="6" x2="21" y2="6" />
                                 <line x1="3" y1="18" x2="21" y2="18" />
@@ -197,9 +221,7 @@ $id = $db->insert('visitor_data', $data);
         <div class="vlt-offcanvas-menu__header">
 
             <!-- <div class="vlt-language-switcher"><a class="is-active" href="index.php">Eng</a><a href="index - fa.php">Fa</a></div> -->
-            <a class="vlt-menu-burger vlt-menu-burger--opened js-offcanvas-menu-close" href="#"><svg
-                    xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="square"
-                    stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+            <a class="vlt-menu-burger vlt-menu-burger--opened js-offcanvas-menu-close" href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
                     <defs />
                     <path d="M18 6L6 18M6 6l12 12" />
                 </svg></a>
@@ -230,16 +252,13 @@ $id = $db->insert('visitor_data', $data);
         </nav>
         <div class="vlt-offcanvas-menu__footer">
 
-            <div class="vlt-offcanvas-menu__socials"><a class="vlt-social-icon vlt-social-icon--style-1"
-                    href="https://<?php echo $basics["linkedin"]; ?>" target="_blank">
+            <div class="vlt-offcanvas-menu__socials"><a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["linkedin"]; ?>" target="_blank">
                     <i class="lnir-linkedin-original"></i>
                 </a>
-                <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["github"]; ?>"
-                    target="_blank">
+                <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["github"]; ?>" target="_blank">
                     <i class="lnir-github-original"></i>
                 </a>
-                <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["instagram"]; ?>"
-                    target="_blank">
+                <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["instagram"]; ?>" target="_blank">
                     <i class="lnir-instagram"></i>
                 </a>
             </div>
@@ -255,16 +274,13 @@ $id = $db->insert('visitor_data', $data);
     <div class="vlt-site-overlay"></div>
 
     <div class="vlt-fixed-socials">
-        <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["linkedin"]; ?>"
-            target="_blank">
+        <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["linkedin"]; ?>" target="_blank">
             <i class="lnir-linkedin-original"></i>
         </a>
-        <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["github"]; ?>"
-            target="_blank">
+        <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["github"]; ?>" target="_blank">
             <i class="lnir-github-original"></i>
         </a>
-        <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["instagram"]; ?>"
-            target="_blank">
+        <a class="vlt-social-icon vlt-social-icon--style-1" href="https://<?php echo $basics["instagram"]; ?>" target="_blank">
             <i class="lnir-instagram"></i>
         </a>
     </div>
@@ -278,16 +294,13 @@ $id = $db->insert('visitor_data', $data);
                 <div class="vlt-section__vertical-align">
                     <div class="vlt-section__content">
 
-                        <div class="vlt-section__ken-burn-background has-mobile-image"><img
-                                src="assets/img/<?php echo $basics["main_image_web"]; ?>" alt=""><img
-                                src="assets/img/<?php echo $basics["main_image_mobile"]; ?>" alt=""></div>
+                        <div class="vlt-section__ken-burn-background has-mobile-image"><img src="assets/img/<?php echo $basics["main_image_web"]; ?>" alt=""><img src="assets/img/<?php echo $basics["main_image_mobile"]; ?>" alt=""></div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-5">
                                     <div class="vlt-gap-160"></div>
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:0s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
 
                                         <!-- <div class="vlt-video-button"><a href="https://vimeo.com/367945766" data-fancybox data-small-btn="true" rel="nofollow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 27">
                                                     <defs />
@@ -296,20 +309,16 @@ $id = $db->insert('visitor_data', $data);
                                     </div>
                                     <div class="vlt-gap-100"></div>
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.1s; animation-duration:700ms;"><span
-                                            class="vlt-display-1 has-white-color">Webdeveloper</span>
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;"><span class="vlt-display-1 has-white-color">Webdeveloper</span>
                                     </div>
                                     <div class="vlt-gap-15"></div>
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.2s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.2s; animation-duration:700ms;">
                                         <h1 class="vlt-large-heading">Amir<span class="has-accent-color">.</span></h1>
                                     </div>
                                     <div class="vlt-gap-15"></div>
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.3s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.3s; animation-duration:700ms;">
                                         <p>
                                             <?php echo $basics["about"]; ?>
                                         </p>
@@ -328,8 +337,7 @@ $id = $db->insert('visitor_data', $data);
                             <div class="row">
                                 <div class="col-xl-6">
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:0s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
                                         <div class="vlt-experience-block"><span class="vlt-experience-block__number">
                                                 <?php echo $exp["year_of"]; ?><span class="has-accent-color">.</span>
                                             </span>
@@ -340,14 +348,12 @@ $id = $db->insert('visitor_data', $data);
                                 </div>
                                 <div class="col-xl-6 col-md-8">
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.1s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
                                         <h3>Great Experience</h3>
                                     </div>
                                     <!-- <div class="vlt-gap-20"></div> -->
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.2s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.2s; animation-duration:700ms;">
                                         <p>
                                             <?php echo $exp["Slogan"]; ?>
                                         </p>
@@ -357,13 +363,10 @@ $id = $db->insert('visitor_data', $data);
                                     <?php
                                     foreach ($skills as $key => $value) {
 
-                                        ?>
-                                        <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                            style="animation-delay:.3s; animation-duration:700ms;">
+                                    ?>
+                                        <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.3s; animation-duration:700ms;">
 
-                                            <div class="vlt-progress-bar"
-                                                data-final-value="<?php echo $value["percentage"]; ?>"
-                                                data-animation-speed="1000">
+                                            <div class="vlt-progress-bar" data-final-value="<?php echo $value["percentage"]; ?>" data-animation-speed="1000">
                                                 <h5 class="vlt-progress-bar__title">
                                                     <?php echo $value["name"]; ?><span class="counter">0</span>
                                                 </h5>
@@ -371,7 +374,7 @@ $id = $db->insert('visitor_data', $data);
                                             </div>
                                         </div>
                                         <div class="vlt-gap-20"></div>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </div>
@@ -387,14 +390,12 @@ $id = $db->insert('visitor_data', $data);
                         <div class="container">
                             <div class="vlt-gap-70"></div>
 
-                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                style="animation-delay:0s; animation-duration:700ms;">
+                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
                                 <div class="d-block d-md-flex align-items-center justify-content-between">
                                     <h3>Work experiences</h3>
                                     <div class="vlt-gap-30--sm"></div>
                                     <form action="download.php" method="post">
-                                        <input class="vlt-btn vlt-btn--primary vlt-btn--md" type="submit" name="submit"
-                                            value="Download
+                                        <input class="vlt-btn vlt-btn--primary vlt-btn--md" type="submit" name="submit" value="Download
                                         Resume" />
                                     </form>
 
@@ -402,19 +403,15 @@ $id = $db->insert('visitor_data', $data);
                             </div>
                             <div class="vlt-gap-50"></div>
 
-                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                style="animation-delay:.1s; animation-duration:700ms;">
+                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
 
-                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-work_experiences-anchor"
-                                    data-effect="" data-gap="120" data-loop="" data-speed="" data-autoplay=""
-                                    data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}"
-                                    data-free-mode="" data-slider-offset="" data-mousewheel="">
+                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-work_experiences-anchor" data-effect="" data-gap="120" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
                                     <div class="swiper-container">
                                         <div class="swiper-wrapper">
 
                                             <?php
                                             foreach ($work_experiences as $key => $value) {
-                                                ?>
+                                            ?>
                                                 <div class="swiper-slide">
                                                     <div class="vlt-timeline-item">
                                                         <div class="row">
@@ -445,15 +442,11 @@ $id = $db->insert('visitor_data', $data);
                                                                 <?php
                                                                 if (isset($value["work_certificate_img"])) {
                                                                     if (file_exists("assets/img/" . $value["work_certificate_img"])) {
-                                                                        ?>
-                                                                        <a
-                                                                            href="assets/img/<?php echo $value["work_certificate_img"]; ?>">
-                                                                            <img src="assets/img/<?php echo $value["work_certificate_img"]; ?>"
-                                                                                class="img-thumbnail"
-                                                                                alt="<?php echo $value["work_certificate_img"]; ?>"
-                                                                                loading="lazy" style="width: 100%;">
+                                                                ?>
+                                                                        <a href="assets/img/<?php echo $value["work_certificate_img"]; ?>">
+                                                                            <img src="assets/img/<?php echo $value["work_certificate_img"]; ?>" class="img-thumbnail" alt="<?php echo $value["work_certificate_img"]; ?>" loading="lazy" style="width: 100%;">
                                                                         </a>
-                                                                        <?php
+                                                                <?php
                                                                     }
                                                                 }
                                                                 ?>
@@ -462,7 +455,7 @@ $id = $db->insert('visitor_data', $data);
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </div>
@@ -470,22 +463,15 @@ $id = $db->insert('visitor_data', $data);
                                 </div>
                                 <div class="vlt-gap-75"></div>
 
-                                <div
-                                    class="vlt-slider-controls vlt-slider-controls--style-2 vlt-work_experiences-anchor">
+                                <div class="vlt-slider-controls vlt-slider-controls--style-2 vlt-work_experiences-anchor">
                                     <div class="vlt-swiper-pagination"></div>
-                                    <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 45">
+                                    <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 45">
                                             <defs />
-                                            <path fill="currentColor" fill-rule="evenodd"
-                                                d="M1.36413 22.5795L24 43.9524l-.7271.6865L.272896 22.9223l.383716-.3623-.362754-.3367L23.0941.319721l.733.680233L1.36413 22.5795z"
-                                                clip-rule="evenodd" />
+                                            <path fill="currentColor" fill-rule="evenodd" d="M1.36413 22.5795L24 43.9524l-.7271.6865L.272896 22.9223l.383716-.3623-.362754-.3367L23.0941.319721l.733.680233L1.36413 22.5795z" clip-rule="evenodd" />
                                         </svg></div>
-                                    <div class="vlt-swiper-button-next"><svg fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 45">
+                                    <div class="vlt-swiper-button-next"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 45">
                                             <defs />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M22.6359 22.3728L0 1.00001.727101.313477 23.7271 22.0301l-.3837.3623.3627.3367L.905866 44.6327l-.732997-.6803L22.6359 22.3728z"
-                                                fill="currentColor" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M22.6359 22.3728L0 1.00001.727101.313477 23.7271 22.0301l-.3837.3623.3627.3367L.905866 44.6327l-.732997-.6803L22.6359 22.3728z" fill="currentColor" />
                                         </svg></div>
                                 </div>
                             </div>
@@ -500,8 +486,7 @@ $id = $db->insert('visitor_data', $data);
                         <div class="container">
                             <div class="vlt-gap-70"></div>
 
-                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                style="animation-delay:0s; animation-duration:700ms;">
+                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
                                 <div class="d-block d-md-flex align-items-center justify-content-between">
                                     <h3>Education</h3>
                                     <div class="vlt-gap-30--sm"></div>
@@ -514,26 +499,19 @@ $id = $db->insert('visitor_data', $data);
                             </div>
                             <div class="vlt-gap-50"></div>
 
-                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                style="animation-delay:.1s; animation-duration:700ms;">
+                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
 
-                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-education-anchor"
-                                    data-effect="" data-gap="120" data-loop="" data-speed="" data-autoplay=""
-                                    data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}"
-                                    data-free-mode="" data-slider-offset="" data-mousewheel="">
+                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-education-anchor" data-effect="" data-gap="120" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
                                     <div class="swiper-container">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <?php
                                                 foreach ($education as $key => $value) {
-                                                    ?>
+                                                ?>
 
                                                     <div class="vlt-timeline-item">
                                                         <div class="row">
-                                                            <div class="col-xl-4"><img
-                                                                    src="assets/img/root/<?php echo $value["institute_logo"]; ?>"
-                                                                    alt="<?php echo $value["institute_logo"]; ?>"
-                                                                    loading="lazy" style="
+                                                            <div class="col-xl-4"><img src="assets/img/root/<?php echo $value["institute_logo"]; ?>" alt="<?php echo $value["institute_logo"]; ?>" loading="lazy" style="
                                                                 width: 30%;">
                                                             </div>
                                                             <div class="col-xl-4"><span class="vlt-timeline-item__date">
@@ -553,7 +531,7 @@ $id = $db->insert('visitor_data', $data);
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <?php
+                                                <?php
 
                                                 }
                                                 ?>
@@ -590,8 +568,7 @@ $id = $db->insert('visitor_data', $data);
                             <div class="row align-items-end">
                                 <div class="col-xl-6">
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:0s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
                                         <div class="has-accent-color">
                                             <h3>Certificates</h3>
                                             <div class="vlt-gap-215 vlt-gap-100--lg"></div>
@@ -601,28 +578,20 @@ $id = $db->insert('visitor_data', $data);
                                 <div class="col-xl-4 col-md-6 offset-xl-2">
                                     <div class="vlt-gap-70--lg"></div>
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.1s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
 
-                                        <div class="vlt-content-slider "
-                                            data-navigation-anchor=".vlt-testimonials-anchor" data-effect="" data-gap=""
-                                            data-loop="" data-speed="" data-autoplay="" data-autoplay-speed=""
-                                            data-slides-centered="" data-slide-settings="{}" data-free-mode=""
-                                            data-slider-offset="" data-mousewheel="">
+                                        <div class="vlt-content-slider " data-navigation-anchor=".vlt-testimonials-anchor" data-effect="" data-gap="" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
                                             <div class="swiper-container">
                                                 <div class="swiper-wrapper">
 
                                                     <?php
                                                     foreach ($Certificates as $key => $value) {
-                                                        ?>
+                                                    ?>
                                                         <div class="swiper-slide">
                                                             <div class="col-xl-2"></div>
                                                             <div class="col-xl-8">
                                                                 <a href="assets/img/<?php echo $value["img"]; ?>">
-                                                                    <img src="assets/img/<?php echo $value["img"]; ?>"
-                                                                        class="img-thumbnail"
-                                                                        alt="<?php echo $value["img"]; ?>" loading="lazy"
-                                                                        style="width: 100%;">
+                                                                    <img src="assets/img/<?php echo $value["img"]; ?>" class="img-thumbnail" alt="<?php echo $value["img"]; ?>" loading="lazy" style="width: 100%;">
                                                                 </a>
                                                             </div>
                                                             <div class="col-xl-2"></div>
@@ -640,17 +609,15 @@ $id = $db->insert('visitor_data', $data);
                                                                         <?php echo $value["Institute"]; ?>
                                                                     </div>
                                                                     <?php if (isset($value["Proof_link"]) && !is_null($value["Proof_link"])) {
-                                                                        ?>
-                                                                        <a class="vlt-btn vlt-btn--primary vlt-btn--md"
-                                                                            href="<?php echo $value["Proof_link"]; ?>"
-                                                                            target="_blank">
+                                                                    ?>
+                                                                        <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["Proof_link"]; ?>" target="_blank">
                                                                             verify</a>
-                                                                        <?php
+                                                                    <?php
                                                                     } ?>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <?php
+                                                    <?php
                                                     }
                                                     ?>
 
@@ -660,21 +627,14 @@ $id = $db->insert('visitor_data', $data);
                                         </div>
                                         <div class="vlt-gap-75"></div>
 
-                                        <div
-                                            class="vlt-slider-controls vlt-slider-controls--style-1 vlt-testimonials-anchor">
-                                            <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 24 45">
+                                        <div class="vlt-slider-controls vlt-slider-controls--style-1 vlt-testimonials-anchor">
+                                            <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 45">
                                                     <defs />
-                                                    <path fill="currentColor" fill-rule="evenodd"
-                                                        d="M1.36413 22.5795L24 43.9524l-.7271.6865L.272896 22.9223l.383716-.3623-.362754-.3367L23.0941.319721l.733.680233L1.36413 22.5795z"
-                                                        clip-rule="evenodd" />
+                                                    <path fill="currentColor" fill-rule="evenodd" d="M1.36413 22.5795L24 43.9524l-.7271.6865L.272896 22.9223l.383716-.3623-.362754-.3367L23.0941.319721l.733.680233L1.36413 22.5795z" clip-rule="evenodd" />
                                                 </svg></div>
-                                            <div class="vlt-swiper-button-next"><svg fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 45">
+                                            <div class="vlt-swiper-button-next"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 45">
                                                     <defs />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M22.6359 22.3728L0 1.00001.727101.313477 23.7271 22.0301l-.3837.3623.3627.3367L.905866 44.6327l-.732997-.6803L22.6359 22.3728z"
-                                                        fill="currentColor" />
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.6359 22.3728L0 1.00001.727101.313477 23.7271 22.0301l-.3837.3623.3627.3367L.905866 44.6327l-.732997-.6803L22.6359 22.3728z" fill="currentColor" />
                                                 </svg></div>
                                         </div>
                                     </div>
@@ -697,25 +657,20 @@ $id = $db->insert('visitor_data', $data);
                         <div class="container">
                             <div class="vlt-gap-100"></div>
 
-                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                style="animation-delay:0s; animation-duration:700ms;">
+                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
 
-                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-projects-anchor"
-                                    data-effect="fade" data-gap="" data-loop="" data-speed="" data-autoplay=""
-                                    data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}"
-                                    data-free-mode="" data-slider-offset="" data-mousewheel="">
+                                <div class="vlt-content-slider " data-navigation-anchor=".vlt-projects-anchor" data-effect="fade" data-gap="" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
                                     <div class="swiper-container">
                                         <div class="swiper-wrapper">
                                             <?php
                                             foreach ($projects as $key => $value) {
-                                                ?>
+                                            ?>
                                                 <div class="swiper-slide">
                                                     <article class="vlt-project">
                                                         <div class="col-md-12">
                                                             <div class="col-md-6">
                                                                 <h3 class="vlt-project-title">
-                                                                    <?php echo $value["title"]; ?><span
-                                                                        class="has-accent-color">.</span>
+                                                                    <?php echo $value["title"]; ?><span class="has-accent-color">.</span>
                                                                 </h3>
                                                                 <div class="vlt-project-excerpt">
                                                                     <p>
@@ -724,26 +679,21 @@ $id = $db->insert('visitor_data', $data);
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <img src="assets/img/<?php echo $value["image"]; ?>" alt=""
-                                                                    loading="lazy">
+                                                                <img src="assets/img/<?php echo $value["image"]; ?>" alt="" loading="lazy">
                                                                 <div class="vlt-gap-20"></div>
                                                                 <?php if (isset($value["direct_link"]) && !is_null($value["direct_link"])) {
 
 
-                                                                    ?>
-                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md"
-                                                                        href="<?php echo $value["direct_link"]; ?>"
-                                                                        target="_blank">See
+                                                                ?>
+                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["direct_link"]; ?>" target="_blank">See
                                                                         Project </a>
-                                                                    <?php
+                                                                <?php
                                                                 }
                                                                 if (isset($value["github_link"]) && !is_null($value["github_link"])) {
-                                                                    ?>
-                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md"
-                                                                        href="<?php echo $value["github_link"]; ?>"
-                                                                        target="_blank">See
+                                                                ?>
+                                                                    <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["github_link"]; ?>" target="_blank">See
                                                                         Project in Github</a>
-                                                                    <?php
+                                                                <?php
                                                                 } ?>
                                                             </div>
                                                         </div>
@@ -751,7 +701,7 @@ $id = $db->insert('visitor_data', $data);
                                                     </article>
                                                 </div>
 
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                             <?php ?>
@@ -763,19 +713,13 @@ $id = $db->insert('visitor_data', $data);
 
                                 <div class="vlt-slider-controls vlt-slider-controls--style-2 vlt-projects-anchor">
                                     <div class="vlt-swiper-pagination"></div>
-                                    <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 24 45">
+                                    <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 45">
                                             <defs />
-                                            <path fill="currentColor" fill-rule="evenodd"
-                                                d="M1.36413 22.5795L24 43.9524l-.7271.6865L.272896 22.9223l.383716-.3623-.362754-.3367L23.0941.319721l.733.680233L1.36413 22.5795z"
-                                                clip-rule="evenodd" />
+                                            <path fill="currentColor" fill-rule="evenodd" d="M1.36413 22.5795L24 43.9524l-.7271.6865L.272896 22.9223l.383716-.3623-.362754-.3367L23.0941.319721l.733.680233L1.36413 22.5795z" clip-rule="evenodd" />
                                         </svg></div>
-                                    <div class="vlt-swiper-button-next"><svg fill="none"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 45">
+                                    <div class="vlt-swiper-button-next"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 45">
                                             <defs />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M22.6359 22.3728L0 1.00001.727101.313477 23.7271 22.0301l-.3837.3623.3627.3367L.905866 44.6327l-.732997-.6803L22.6359 22.3728z"
-                                                fill="currentColor" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M22.6359 22.3728L0 1.00001.727101.313477 23.7271 22.0301l-.3837.3623.3627.3367L.905866 44.6327l-.732997-.6803L22.6359 22.3728z" fill="currentColor" />
                                         </svg></div>
                                 </div>
                             </div>
@@ -825,23 +769,18 @@ $id = $db->insert('visitor_data', $data);
                     <div class="vlt-section__content">
                         <div class="container">
 
-                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                style="animation-delay:0s; animation-duration:700ms;">
+                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
                                 <h3>Recent news</h3>
                             </div>
                             <div class="vlt-gap-100"></div>
                             <div class="row">
                                 <div class="col-xl-4">
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.1s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
 
                                         <article class="vlt-post vlt-post--masonry">
-                                            <div class="vlt-post-border"><span class="top"></span><span
-                                                    class="right"></span><span class="bottom"></span><span
-                                                    class="left"></span></div>
-                                            <div class="vlt-post-media"><img src="assets/img/blog-01.jpg" alt=""
-                                                    loading="lazy"></div>
+                                            <div class="vlt-post-border"><span class="top"></span><span class="right"></span><span class="bottom"></span><span class="left"></span></div>
+                                            <div class="vlt-post-media"><img src="assets/img/blog-01.jpg" alt="" loading="lazy"></div>
                                             <div class="vlt-post-content">
                                                 <header class="vlt-post-header"><span class="vlt-post-date">December 27,
                                                         2020</span>
@@ -858,12 +797,9 @@ $id = $db->insert('visitor_data', $data);
                                                 </div>
                                                 <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
                                                 <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="#">
-                                                        Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 16 8">
+                                                        Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
                                                             <defs />
-                                                            <path
-                                                                d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z"
-                                                                fill="currentColor" />
+                                                            <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
                                                         </svg></a></footer>
                                             </div>
                                         </article>
@@ -872,15 +808,11 @@ $id = $db->insert('visitor_data', $data);
                                 <div class="col-xl-4">
                                     <div class="vlt-gap-30--lg"></div>
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.2s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.2s; animation-duration:700ms;">
 
                                         <article class="vlt-post vlt-post--masonry">
-                                            <div class="vlt-post-border"><span class="top"></span><span
-                                                    class="right"></span><span class="bottom"></span><span
-                                                    class="left"></span></div>
-                                            <div class="vlt-post-media"><img src="assets/img/blog-02.jpg" alt=""
-                                                    loading="lazy"></div>
+                                            <div class="vlt-post-border"><span class="top"></span><span class="right"></span><span class="bottom"></span><span class="left"></span></div>
+                                            <div class="vlt-post-media"><img src="assets/img/blog-02.jpg" alt="" loading="lazy"></div>
                                             <div class="vlt-post-content">
                                                 <header class="vlt-post-header"><span class="vlt-post-date">December 27,
                                                         2020</span>
@@ -897,12 +829,9 @@ $id = $db->insert('visitor_data', $data);
                                                 </div>
                                                 <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
                                                 <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="#">
-                                                        Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 16 8">
+                                                        Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
                                                             <defs />
-                                                            <path
-                                                                d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z"
-                                                                fill="currentColor" />
+                                                            <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
                                                         </svg></a></footer>
                                             </div>
                                         </article>
@@ -911,15 +840,11 @@ $id = $db->insert('visitor_data', $data);
                                 <div class="col-xl-4">
                                     <div class="vlt-gap-30--lg"></div>
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.3s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.3s; animation-duration:700ms;">
 
                                         <article class="vlt-post vlt-post--masonry">
-                                            <div class="vlt-post-border"><span class="top"></span><span
-                                                    class="right"></span><span class="bottom"></span><span
-                                                    class="left"></span></div>
-                                            <div class="vlt-post-media"><img src="assets/img/blog-03.jpg" alt=""
-                                                    loading="lazy"></div>
+                                            <div class="vlt-post-border"><span class="top"></span><span class="right"></span><span class="bottom"></span><span class="left"></span></div>
+                                            <div class="vlt-post-media"><img src="assets/img/blog-03.jpg" alt="" loading="lazy"></div>
                                             <div class="vlt-post-content">
                                                 <header class="vlt-post-header"><span class="vlt-post-date">December 27,
                                                         2020</span>
@@ -936,12 +861,9 @@ $id = $db->insert('visitor_data', $data);
                                                 </div>
                                                 <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
                                                 <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="#">
-                                                        Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 16 8">
+                                                        Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
                                                             <defs />
-                                                            <path
-                                                                d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z"
-                                                                fill="currentColor" />
+                                                            <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
                                                         </svg></a></footer>
                                             </div>
                                         </article>
@@ -963,8 +885,7 @@ $id = $db->insert('visitor_data', $data);
                             <div class="row">
                                 <div class="col-xl-4">
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:0s; animation-duration:700ms;">
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
                                         <h3>Contact</h3>
                                         <div class="vlt-gap-30"></div>
                                         <p>Your comment makes me better.</p>
@@ -986,35 +907,51 @@ $id = $db->insert('visitor_data', $data);
                                 <div class="col-xl-6 offset-xl-2">
                                     <div class="vlt-gap-70--lg"></div>
 
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm"
-                                        style="animation-delay:.1s; animation-duration:700ms;">
-                                        <h4>If you have any questions or comments about me, <span
-                                                class="has-accent-color">send me a message</span></h4>
-                                        <div class="vlt-gap-20"></div>
-                                        <!-- 
-                                        <form action="send_email.php" method="post" class="vlt-contact-form" novalidate="novalidate"> -->
+                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
+                                        <h4>If you have any questions or comments about me, <span class="has-accent-color">send me a message</span></h4>
+                                        <div class="vlt-gap-20">
+
+                                            <?php
+                                            if ($err == 10) {
+                                            ?>
+                                                <div class="message danger">Wrong captcha!!!</div>
+                                            <?php
+                                            }
+                                            if ($err == 11) {
+                                            ?>
+                                                <div class="message success">Your message is successfully sent...</div>
+                                            <?php
+                                            }
+                                            if ($err == 12) {
+                                            ?>
+                                                <div class="message danger">Sorry something went wrong!!!</div>
+                                            <?php
+                                            }
+                                            ?>
+
+                                        </div>
+
                                         <form id="message-form" action="send_email.php" method="post" novalidate>
                                             <div class="vlt-form-group">
-                                                <input id="name" type="text" name="name" required
-                                                    placeholder="Your Name">
+                                                <input id="name" type="text" name="name" required placeholder="Your Name">
                                             </div>
                                             <div class="vlt-form-group">
-                                                <input type="email" id="email" name="email" required
-                                                    placeholder="Your Email">
+                                                <input type="email" id="email" name="email" required placeholder="Your Email">
                                             </div>
                                             <div class="vlt-form-group">
-                                                <textarea name="message" id="message" rows="3" required
-                                                    placeholder="Message"></textarea>
+                                                <textarea name="message" id="message" rows="3" required placeholder="Message"></textarea>
                                             </div>
-                                            <!-- <div class="message success">Your message is successfully sent...</div>
-                                            <div class="message danger">Sorry something went wrong!</div> -->
-                                            <input type="submit" class="vlt-btn vlt-btn--primary vlt-btn--md"
-                                                value="Contact Me">
-                                            <!-- <button class="vlt-btn vlt-btn--primary vlt-btn--md">Contact Me</button> -->
+
+                                            <div>
+                                                <div style="display:inline-block;">
+                                                    <div style="float: left;margin-top: 16px;">
+                                                        <div id="captchaimage"><a href="<?php echo htmlEntities($_SERVER['PHP_SELF'], ENT_QUOTES); ?>#Contact" id="refreshimg" title="Click to refresh image"><img src="captcha/images/image.php?<?php echo time(); ?>" width="132" height="46" alt="Captcha image"></a></div>
+                                                    </div>
+                                                    <div style=" float: right;"><input type="text" maxlength="6" name="captcha" id="captcha" placeholder="Enter the characters..."></div>
+                                                </div>
+                                            </div>
+                                            <input type="submit" class="vlt-btn vlt-btn--primary vlt-btn--md" value="Contact Me">
                                         </form>
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -1080,7 +1017,6 @@ $id = $db->insert('visitor_data', $data);
                 },
             }
         });
-
     </script>
 </body>
 
