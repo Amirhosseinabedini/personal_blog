@@ -1,9 +1,5 @@
 <?php
-session_start();
 
-if (isset($_POST)) {
-	if (isset($_POST["captcha"]) & ($_POST["captcha"] == $_SESSION['captcha_id'])) {
-		if (isset($_POST["name"]) & isset($_POST["email"]) & isset($_POST["message"])) {
 
 			require_once('connector/MysqliDb.php');
 			require_once('connector/cn.php');
@@ -132,18 +128,3 @@ if (isset($_POST)) {
 
 
 
-
-
-
-
-
-
-		} else {
-			header("Location: index.php");
-		}
-	} else {
-		header("Location: index.php?err=10#Contact");
-	}
-} else {
-	header("Location: index.php");
-}
