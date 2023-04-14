@@ -2,14 +2,10 @@
 
 
     <?php
-    
-
-
     $db = new MysqliDb (Array (
         'host' => 'localhost',
         'username' => 'root', 
-        'password' => '',
-        'db'=> 'personal_blog',
+        'password' => 'root',
+        'db'=> 'amirabed_personal_blog',
         'charset' => 'utf8'));
-
     ?>
