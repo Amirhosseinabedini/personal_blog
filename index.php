@@ -948,6 +948,8 @@ $id = $db->insert('visitor_data', $data);
                                                         <div id="captchaimage"><a href="<?php echo htmlEntities($_SERVER['PHP_SELF'], ENT_QUOTES); ?>#Contact" id="refreshimg" title="Click to refresh image"><img src="captcha/images/image.php?<?php echo time(); ?>" width="132" height="46" alt="Captcha image"></a></div>
                                                     </div>
                                                     <div style=" float: right;"><input type="text" maxlength="6" name="captcha" id="captcha" placeholder="Enter the characters..."></div>
+
+                                                    <div class="message danger">case sensitive!!!</div>
                                                 </div>
                                             </div>
                                             <input type="submit" class="vlt-btn vlt-btn--primary vlt-btn--md" value="Contact Me">
