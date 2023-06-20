@@ -149,6 +149,8 @@ $id = $db->insert('visitor_data', $data);
     <script src="captcha/../../lib/jquery.js"></script>
     <script src="captcha/../../dist/jquery.validate.js"></script>
     <script src="captcha/captcha.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
 
     <!-- <link rel="stylesheet" href="assets/css/custom.css"> -->
@@ -191,10 +193,6 @@ $id = $db->insert('visitor_data', $data);
                                 <li data-menuanchor="Testimonials"><a href="#Testimonials">Testimonials</a>
                                 </li>
                                 <li data-menuanchor="Projects"><a href="#Projects">Projects</a>
-                                </li>
-                                <!-- <li data-menuanchor="Partners"><a href="#Partners">Partners</a>
-                                </li> -->
-                                <li data-menuanchor="Blog"><a href="#Blog">Blog</a>
                                 </li>
                                 <li data-menuanchor="Contact"><a href="#Contact">Contact</a>
                                 </li>
@@ -241,10 +239,6 @@ $id = $db->insert('visitor_data', $data);
                 <li data-menuanchor="Testimonials"><a style="width: 100%;" href="#Testimonials">Testimonials</a>
                 </li>
                 <li data-menuanchor="Projects"><a style="width: 100%;" href="#Projects">Projects</a>
-                </li>
-                <!-- <li data-menuanchor="Partners"><a style="width: 100%;" href="#Partners">Partners</a>
-                                </li> -->
-                <li data-menuanchor="Blog"><a style="width: 100%;" href="#Blog">Blog</a>
                 </li>
                 <li data-menuanchor="Contact"><a style="width: 100%;" href="#Contact">Contact</a>
                 </li>
@@ -565,83 +559,65 @@ $id = $db->insert('visitor_data', $data);
                         <div class="vlt-section__ken-burn-background"><img src="assets/img/testimonials.jpg" alt="">
                         </div>
                         <div class="container">
-                            <div class="row align-items-end">
-                                <div class="col-xl-6">
-
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
-                                        <div class="has-accent-color">
-                                            <h3>Certificates</h3>
-                                            <div class="vlt-gap-215 vlt-gap-100--lg"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6 offset-xl-2">
-                                    <div class="vlt-gap-70--lg"></div>
-
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
-
-                                        <div class="vlt-content-slider " data-navigation-anchor=".vlt-testimonials-anchor" data-effect="" data-gap="" data-loop="" data-speed="" data-autoplay="" data-autoplay-speed="" data-slides-centered="" data-slide-settings="{}" data-free-mode="" data-slider-offset="" data-mousewheel="">
-                                            <div class="swiper-container">
-                                                <div class="swiper-wrapper">
-
-                                                    <?php
-                                                    foreach ($Certificates as $key => $value) {
-                                                    ?>
-                                                        <div class="swiper-slide">
-                                                            <div class="col-xl-2"></div>
-                                                            <div class="col-xl-8">
-                                                                <a href="assets/img/<?php echo $value["img"]; ?>">
-                                                                    <img src="assets/img/<?php echo $value["img"]; ?>" class="img-thumbnail" alt="<?php echo $value["img"]; ?>" loading="lazy" style="width: 100%;">
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-xl-2"></div>
-                                                            <div class="vlt-testimonial">
-                                                                <div class="vlt-testimonial__text">
-                                                                    <p>
-                                                                        <?php echo $value["description"]; ?>
-                                                                    </p>
-                                                                </div>
-                                                                <div class="vlt-testimonial__meta">
-                                                                    <h5 class="vlt-testimonial__name">
-                                                                        <?php echo $value["title"]; ?>
-                                                                    </h5>
-                                                                    <div class="vlt-testimonial__function">
-                                                                        <?php echo $value["Institute"]; ?>
-                                                                    </div>
-                                                                    <?php if (isset($value["Proof_link"]) && !is_null($value["Proof_link"])) {
-                                                                    ?>
-                                                                        <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["Proof_link"]; ?>" target="_blank">
-                                                                            verify</a>
-                                                                    <?php
-                                                                    } ?>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php
-                                                    }
-                                                    ?>
-
-                                                    ّ
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="vlt-gap-75"></div>
-
-                                        <div class="vlt-slider-controls vlt-slider-controls--style-1 vlt-testimonials-anchor">
-                                            <div class="vlt-swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 45">
-                                                    <defs />
-                                                    <path fill="currentColor" fill-rule="evenodd" d="M1.36413 22.5795L24 43.9524l-.7271.6865L.272896 22.9223l.383716-.3623-.362754-.3367L23.0941.319721l.733.680233L1.36413 22.5795z" clip-rule="evenodd" />
-                                                </svg></div>
-                                            <div class="vlt-swiper-button-next"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 45">
-                                                    <defs />
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.6359 22.3728L0 1.00001.727101.313477 23.7271 22.0301l-.3837.3623.3627.3367L.905866 44.6327l-.732997-.6803L22.6359 22.3728z" fill="currentColor" />
-                                                </svg></div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
+                                <h3>Certificates</h3>
                             </div>
-                        </div>
-                    </div>
+                            <div class="vlt-gap-100"></div>
+                            <div class="row">
+                                <?php
+                                foreach ($Certificates as $key => $value) {
+                                ?>
+                                    <div class="col-xl-4" style="margin-top: 30px;">
+                                        <div class="vlt-gap-30--lg"></div>
+
+                                        <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.3s; animation-duration:700ms;">
+
+                                            <article class="vlt-post vlt-post--masonry">
+                                                <div class="vlt-post-border"><span class="top"></span><span class="right"></span><span class="bottom"></span><span class="left"></span></div>
+                                                <div class="vlt-post-media"><img src="assets/img/<?php echo $value["img"]; ?>" alt="" loading="lazy"></div>
+                                                <div class="vlt-post-content">
+                                                    <header class="vlt-post-header">
+                                                        <span class="vlt-post-date">
+                                                            <?php echo $value["Institute"]; ?>
+                                                        </span>
+                                                        <!-- <h3 class="vlt-post-title"><a href="single-post.php">Secrets of the
+                                                            Serpents</a></h3>                                                     -->
+                                                        <h5 class="vlt-post-title"><?php echo substr($value["title"], 0, 35) . "..."; ?></h5>
+                                                    </header>
+                                                    <div class="vlt-post-excerpt">
+                                                        <p><?php echo substr($value["description"], 0, 80) . "..."; ?></p>
+                                                    </div>
+                                                    <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
+                                                    <footer class="vlt-post-footer">
+                                                        <?php if (isset($value["Proof_link"]) && !is_null($value["Proof_link"])) {
+                                                        ?>
+                                                            <a class="vlt-btn vlt-btn--primary vlt-btn--md" href="<?php echo $value["Proof_link"]; ?>" target="_blank">
+                                                                verify</a>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <div style="height: 2.8125rem;padding: 0 2.8125rem;"></div>
+                                                        <?php
+                                                        } ?>
+                                                        <a class="vlt-read-more-link" href="#" data-fancybox data-src="assets/img/<?php echo $value["img"]; ?>" data-caption="<?php echo $value["description"]; ?>">
+                                                            Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
+                                                                <defs />
+                                                                <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
+                                                            </svg></a>
+
+                                                        </a>
+
+                                                    </footer>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="vlt-gap-30--lg"></div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div></div>
                 </div>
             </div>
 
@@ -762,118 +738,6 @@ $id = $db->insert('visitor_data', $data);
                     </div>
                 </div>
             </div> -->
-
-
-            <div class="vlt-section pp-scrollable" data-anchor="Blog">
-                <div class="vlt-section__vertical-align">
-                    <div class="vlt-section__content">
-                        <div class="container">
-
-                            <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:0s; animation-duration:700ms;">
-                                <h3>Recent news</h3>
-                            </div>
-                            <div class="vlt-gap-100"></div>
-                            <div class="row">
-                                <div class="col-xl-4">
-
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.1s; animation-duration:700ms;">
-
-                                        <article class="vlt-post vlt-post--masonry">
-                                            <div class="vlt-post-border"><span class="top"></span><span class="right"></span><span class="bottom"></span><span class="left"></span></div>
-                                            <div class="vlt-post-media"><img src="assets/img/blog-01.jpg" alt="" loading="lazy"></div>
-                                            <div class="vlt-post-content">
-                                                <header class="vlt-post-header"><span class="vlt-post-date">December 27,
-                                                        2020</span>
-                                                    <!-- <h3 class="vlt-post-title"><a href="single-post.php">Scent in the
-                                                            Voyages</a></h3> -->
-                                                    <h3 class="vlt-post-title"><a href="#">Scent in the
-                                                            Voyages</a></h3>
-                                                </header>
-                                                <div class="vlt-post-excerpt">
-                                                    <p>Let years seasons given two fowl above is itself shall third
-                                                        night female seasons you’re whales, unto had fowl Herb. Moving
-                                                        so. Said be fruitful first lights creeping deep void, lesser.
-                                                    </p>
-                                                </div>
-                                                <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
-                                                <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="#">
-                                                        Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
-                                                            <defs />
-                                                            <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
-                                                        </svg></a></footer>
-                                            </div>
-                                        </article>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="vlt-gap-30--lg"></div>
-
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.2s; animation-duration:700ms;">
-
-                                        <article class="vlt-post vlt-post--masonry">
-                                            <div class="vlt-post-border"><span class="top"></span><span class="right"></span><span class="bottom"></span><span class="left"></span></div>
-                                            <div class="vlt-post-media"><img src="assets/img/blog-02.jpg" alt="" loading="lazy"></div>
-                                            <div class="vlt-post-content">
-                                                <header class="vlt-post-header"><span class="vlt-post-date">December 27,
-                                                        2020</span>
-                                                    <!-- <h3 class="vlt-post-title"><a href="single-post.php">The Stone of
-                                                            the Flames</a></h3> -->
-                                                    <h3 class="vlt-post-title"><a href="#">The Stone of
-                                                            the Flames</a></h3>
-                                                </header>
-                                                <div class="vlt-post-excerpt">
-                                                    <p>Let years seasons given two fowl above is itself shall third
-                                                        night female seasons you’re whales, unto had fowl Herb. Moving
-                                                        so. Said be fruitful first lights creeping deep void, lesser.
-                                                    </p>
-                                                </div>
-                                                <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
-                                                <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="#">
-                                                        Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
-                                                            <defs />
-                                                            <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
-                                                        </svg></a></footer>
-                                            </div>
-                                        </article>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="vlt-gap-30--lg"></div>
-
-                                    <div class="vlt-animated-block" data-animation-name="fadeInUpSm" style="animation-delay:.3s; animation-duration:700ms;">
-
-                                        <article class="vlt-post vlt-post--masonry">
-                                            <div class="vlt-post-border"><span class="top"></span><span class="right"></span><span class="bottom"></span><span class="left"></span></div>
-                                            <div class="vlt-post-media"><img src="assets/img/blog-03.jpg" alt="" loading="lazy"></div>
-                                            <div class="vlt-post-content">
-                                                <header class="vlt-post-header"><span class="vlt-post-date">December 27,
-                                                        2020</span>
-                                                    <!-- <h3 class="vlt-post-title"><a href="single-post.php">Secrets of the
-                                                            Serpents</a></h3>                                                     -->
-                                                    <h3 class="vlt-post-title"><a href="#">Secrets of the
-                                                            Serpents</a></h3>
-                                                </header>
-                                                <div class="vlt-post-excerpt">
-                                                    <p>Let years seasons given two fowl above is itself shall third
-                                                        night female seasons you’re whales, unto had fowl Herb. Moving
-                                                        so. Said be fruitful first lights creeping deep void, lesser.
-                                                    </p>
-                                                </div>
-                                                <!-- <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="single-post.php"> -->
-                                                <footer class="vlt-post-footer"><a class="vlt-read-more-link" href="#">
-                                                        Read more<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 8">
-                                                            <defs />
-                                                            <path d="M15.3536 4.35355c.1952-.19526.1952-.51184 0-.7071L12.1716.464466c-.1953-.195262-.5119-.195262-.7071 0-.1953.195262-.1953.511845 0 .707104L14.2929 4l-2.8284 2.82843c-.1953.19526-.1953.51184 0 .7071.1952.19527.5118.19527.7071 0l3.182-3.18198zM0 4.5h15v-1H0v1z" fill="currentColor" />
-                                                        </svg></a></footer>
-                                            </div>
-                                        </article>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
             <div class="vlt-section pp-scrollable" data-anchor="Contact">
@@ -1020,6 +884,8 @@ $id = $db->insert('visitor_data', $data);
             }
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
 </body>
 
 </html>
