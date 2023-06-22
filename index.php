@@ -617,7 +617,8 @@ $id = $db->insert('visitor_data', $data);
                                 }
                                 ?>
                             </div>
-                        </div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
