@@ -1,12 +1,18 @@
 <?php
 session_start();
+require 'vendor/autoload.php'; // Include Composer's autoloader
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once('connector/MysqliDb.php');
+require_once('connector/cn.php');
 
 if (isset($_POST)) {
 	if (isset($_POST["captcha"]) & ($_POST["captcha"] == $_SESSION['captcha_id'])) {
 		if (isset($_POST["name"]) & isset($_POST["email"]) & isset($_POST["message"])) {
 
-			require_once('connector/MysqliDb.php');
-			require_once('connector/cn.php');
+
 			$date = new DateTime("now", new DateTimeZone('Iran'));
 
 			$data = array(
@@ -17,85 +23,38 @@ if (isset($_POST)) {
 				"ip" => $_SERVER['REMOTE_ADDR'],
 				"answer_status" => '0'
 			);
-			$id = $db->insert('messege', $data);
-			if ($id) {
-				header("Location: index.php?err=11#Contact");
-			} else {
-				header("Location: index.php?err=12#Contact");
+			$mail = new PHPMailer(true);
+
+			$mail->IsSMTP();
+			try {
+				$mail->SMTPDebug = 0; // Set to 2 or higher for debugging
+				$mail->SMTPAuth = true;
+				$mail->SMTPSecure = 'ssl'; // Use 'tls' or 'ssl' depending on the port
+				$mail->Port = 465; // Use 587 for TLS, 465 for SSL
+				$mail->Host = 'smtp.gmail.com';
+				$mail->Mailer = 'smtp';
+				$mail->Username = 'abediniamirhossein1996@gmail.com';
+				$mail->Password = 'nimfofxczujhnzhh'; // Use the App Password here
+
+				$mail->SetFrom('abediniamirhossein1996@gmail.com', 'Amir Abedini');
+				$mail->AddReplyTo('abediniamirhossein1996@gmail.com', 'abediniamirhossein1996@gmail.com');
+				$mail->AddAddress('abediniamirhossein96@gmail.com'); // Add at least one recipient here
+
+				$mail->Subject = 'Bewerbung  als [jobstelle]';
+				$mail->WordWrap = 80;
+				$mail->MsgHTML(' ');
+				$mail->IsHTML(true);
+
+				if ($mail->Send()) {
+					echo "Message Sent OK\n";
+				} else {
+					echo "Message could not be sent. Mailer Error: ", $mail->ErrorInfo;
+				}
+			} catch (phpmailerException $e) {
+				echo $e->errorMessage(); // Pretty error messages from PHPMailer
+			} catch (Exception $e) {
+				echo $e->getMessage(); // Boring error messages from anything else!
 			}
-
-
-			// require_once('PHPMailer/class.phpmailer.php');
-			// require_once('PHPMailer/class.smtp.php');
-
-			// use PHPMailer\PHPMailer\PHPMailer;
-			// use PHPMailer\PHPMailer\SMTP;
-			// use PHPMailer\PHPMailer\Exception;
-
-
-
-			// $mail = new PHPMailer(true);
-			// $mail->IsSMTP();
-			// try
-			// {
-			// 	$mail->Host='smtp.gmail.com';
-			// 	$mail->SMTPAuth=true;
-			// 	$mail->SMTPSecure="ssl";
-			// 	$mail->Port=465;
-			// 	$mail->Username="abedinia313@gmail.com";
-			// 	$mail->Password="2080642359";
-			// 	$mail->AddAddress($tested["email"]);
-			// 	$mail->SetFrom("abedinia313@gmail.com","پروژه پنل ادمین ");
-			// 	$mail->Subject='';
-			// 	$mail->CharSet="UTF-8";
-			// 	$mail->ContentType="text/htm";
-			// 	$mail->MsgHTML('salaaaaaaaaaaaaaaaaaaaaaaaaaaaam');
-			// 	$mail->Send();
-			// 	// header("Location: activation_check.php");
-
-
-			// }
-			// catch(phpmailerException $e)
-			// {
-			// 	echo $e->errorMessage();
-			// }
-			// catch(Exception $e)
-			// {
-			// 	echo $e->getMessage();
-			// }
-
-			// 	$mail->SMTPDebug = 1;
-			// 	$mail->SMTPAuth = true;
-			// 	$mail->SMTPSecure = "tls";
-			// 	$mail->Port = 587;
-			// 	$mail->Host = "smtp.gmail.com";
-			// 	$mail->Username = "abediniamirhossein1996@gmail.com";
-			// 	$mail->Password = "Amirr512@";
-
-			// 	$mail->From = "abediniamirhossein1996@gmail.com";
-			// 	$mail->FromName = "Amirabedini";
-
-			// 	$mail->addAddress("abedinia313@gmail.com", "<destination name>");
-
-			// 	$mail->isHTML(true);
-
-			// 	$mail->Subject = "Mailing with PHPMailer";
-			// 	$mail->Body = "<b>Congratulation</b>";
-			// 	$mail->AltBody = "Congratulation";
-
-			// 	try {
-			// 		$mail->send();
-			// 		echo "Message has been sent successfully";
-			// 		die;
-			// 		header("Location: index.php#Contact");
-			// 	} catch (Exception $e) {
-			// 		echo "Mailer Error: " . $mail->ErrorInfo;
-			// 		die;
-			// 		header("Location: index.php#Contact");
-			// 	}
-			// } else {
-			// 	echo "22222222";
-			// }
 		} else {
 			header("Location: index.php");
 		}
